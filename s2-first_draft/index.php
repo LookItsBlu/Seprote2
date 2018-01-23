@@ -31,7 +31,7 @@
                     <div id="chart"></div>
                     <div class="selection">
                         <button class="tabBtn">Tableau</button>
-                        <button class="pieBtn">circulaire</button>
+                        <button class="pieBtn">Circulaire</button>
                         <button class="barBtn">Barres</button>
                     </div>
                 </div>

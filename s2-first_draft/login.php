@@ -3,22 +3,21 @@
 ?>
 
 <div class="loginWrap">
-	<img class="loginSeprote" src="src/seprote.png" alt="Seprote"/>
-	<div class="loginIutImg">
-		<img class="loginIut" src="src/iut.png" alt="IUT Calais Boulogne"/>
-	</div>
+    <img class="loginSeprote" src="src/seprote.png" alt="Seprote" />
+    <div class="loginIutImg">
+        <img class="loginIut" src="src/iut.png" alt="IUT Calais Boulogne" />
+    </div>
+    <div class="row">
+        <div class="form_connex col-offset-sm-3 col-sm-6">
+            <form method="POST" action="login.php" id="loginForm">
+                <input type="text" placeholder="Adresse e-mail" name="login" />
+                <input type="password" placeholder="Mot de passe" name="mdp" />
+                <button type="input">Connexion</button>
+            </form>
+        </div>
+    </div>
 
-	<form method="POST" action="login.php" id="loginForm">
-		<label>E-mail</label>
-		<input type="text" name="login"/>
-		<br/><br/>
-		<label>Mot de passe</label>
-		<input type="password" name="mdp"/>
-		<br/><br/><br/>
-		<button type="input">Connexion</button>
-	</form>
-
-<?php
+    <?php
 	require_once "Error.php";
 	require_once "BDD.php";
 
