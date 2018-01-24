@@ -7,8 +7,6 @@ body {
     font-family: 'Product Sans', Arial, sans-serif;
     background-color: #eee;
     display: table;
-    width: 100%;
-    height: 100vh;
 }
 
 .loginWrap {
@@ -16,22 +14,24 @@ body {
     text-align: center;
 }
 
+/*
 .loginSeprote {
-    margin: 25px 0 65px 0;
+    margin: 25px 0 50px 0;
     height: 56px;
     display: inline-block;
 }
+*/
 
 .loginIut {
     height: 130px;
     display: inline-block;
 }
 
+/*
 .loginIutImg {
-    margin-bottom: 75px;
+    margin-bottom: 50px;
 }
 
-/*
 #loginForm {
     width: 25%;
     margin: 0 auto;
@@ -110,6 +110,16 @@ footer {
 
 /* ------------ Etienne ajout ------------ */
 
+.loginSeprote {
+    height: 60px;
+    left: 0;
+    position: absolute;
+}
+
+.loginIutImg {
+    margin: 10px 0 75px;
+}
+
 .form_connex {
     background-color: white;
     margin: 0 auto;
@@ -118,7 +128,6 @@ footer {
 
 .form_connex #loginForm {
     display: block;
-    padding-top: 20px;
 }
 
 .form_connex input {
@@ -136,4 +145,11 @@ footer {
     font-family: Arial, sans-serif;
     width: 100%;
     padding: 0;
+    border: none!important;
+    transition: 0.25s ease all;
+}
+
+.form_connex button:hover {
+    background-color: rgba(0, 0, 255, 0.5);
+    letter-spacing: 7.5;
 }
