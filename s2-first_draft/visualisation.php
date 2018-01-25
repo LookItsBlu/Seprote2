@@ -1,6 +1,6 @@
 <?php
 	session_start();
-    require_once "BDD.php";
+    require_once "bdd/BDD.php";
 
 
 
@@ -16,10 +16,10 @@
     }
 
 
-	include('header.php');
+	include('includes/header.php');
 
 	if(!empty($_SESSION['id']) && $_SESSION['role'] < 3){ // On est connecter
-	   include('menu.php');
+	   include('includes/menu.php');
 ?>
 
 <div id="main">
@@ -48,7 +48,7 @@ $("#prog").change(function(){
     var params = "id_prog=" + $("#prog").val();
                     $.ajax({
                         type: 'POST',
-                        url: 'ajaxvisualprog.php',
+                        url: 'js/ajax/ajaxvisualprog.php',
                         data: params,
                         success: ajaxOK
                     });
@@ -70,6 +70,6 @@ function ajaxOK(data){
     } else { header('Location: login.php'); }
 
 
-	include('footer.php');
+	include('includes/footer.php');
 ?>
 

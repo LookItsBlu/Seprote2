@@ -1,7 +1,9 @@
 <?php
 
 session_start();
-require_once "BDD.php";
+
+require_once "bdd/BDD.php";
+
 $ROLE = array("1" => "Administrateur" , "2" => "Gestionnaire" ,"3" => "Professeur");
 
 if($_SESSION['role'] < 2){
@@ -78,13 +80,13 @@ if($_SESSION['role'] < 2){
 			}
 		}
 
-		include('header.php');
+		include('includes/header.php');
 
 			if(!empty($_SESSION['id'])){ // On est connecté
 		?>
 
 
-    <?php include('menu.php'); ?>
+    <?php include('includes/menu.php'); ?>
 
     <div id="main">
         <div class="mainWrap">
@@ -158,27 +160,27 @@ if($_SESSION['role'] < 2){
 
                                     <div id="dialog_edit" title="Edition de compte">
                                         <p class="validateTips">Tous les champs sont nécessaires.</p>
-                                            <form name="edit_compte" id="editCompte" method="POST" action="gestion_compte.php">
-                                                <label for="nom">Nom:</label>
-                                                <input type="text" name="nom" id="nom" class="text ui-widget-content ui-corner-all">
-                                                <br>
-                                                <label for="date_fin">Prénom:</label>
-                                                <input type="text" name="prenom" id="prenom" class="text ui-widget-content ui-corner-all">
-                                                <br>
-                                                <label for="mail">Mail:</label>
-                                                <input type="text" name="mail" id="mail" class="text ui-widget-content ui-corner-all">
-                                                <br>
-                                                <label for="role">Rôle:</label>
-                                                <select name="role">
+                                        <form name="edit_compte" id="editCompte" method="POST" action="gestion_compte.php">
+                                            <label for="nom">Nom:</label>
+                                            <input type="text" name="nom" id="nom" class="text ui-widget-content ui-corner-all">
+                                            <br>
+                                            <label for="date_fin">Prénom:</label>
+                                            <input type="text" name="prenom" id="prenom" class="text ui-widget-content ui-corner-all">
+                                            <br>
+                                            <label for="mail">Mail:</label>
+                                            <input type="text" name="mail" id="mail" class="text ui-widget-content ui-corner-all">
+                                            <br>
+                                            <label for="role">Rôle:</label>
+                                            <select name="role">
                                                 <option value=""></option>
                                                 <option value="1">Administrateur</option>
                                                 <option value="2">Gestionnaire</option>
                                                 <option value="3">Professeur</option>
                                             </select>
-                                                <br>
+                                            <br>
 
-                                                <input type="hidden" id="id" name="id" value="">
-                                                <input type="hidden" name='type_form' value='2'>
+                                            <input type="hidden" id="id" name="id" value="">
+                                            <input type="hidden" name='type_form' value='2'>
                                         </form>
 
                                     </div>
@@ -279,7 +281,7 @@ if($_SESSION['role'] < 2){
 
 		else header('Location: login.php');
 
-		include('footer.php');
+		include('includes/footer.php');
 }
 else header('Location: index.php')
 

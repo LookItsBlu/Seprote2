@@ -1,0 +1,412 @@
+* {
+    outline: none;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Product Sans', Arial, sans-serif;
+    background-color: #fafafa;
+    display: table;
+    width: 100%;
+    height: 100vh;
+}
+
+body > div {
+    display: table-row;
+    height: 100%;
+}
+
+h2 {
+    font-size: 34px;
+}
+
+h3 {
+    font-size: 28px;
+    margin: 20px 0;
+}
+
+.ui-corner-all {
+    border-radius: 0;
+}
+
+.ui-state-error {
+    position: absolute;
+    bottom: 50px;
+    left: 10px;
+    padding: 10px 25px!important;
+    border-radius: 0;
+    border: none!important;
+    background: rgba(232, 74, 95, 0.3);
+    color: #2a363b;
+    box-shadow: 0 0px 15px 0px rgba(20, 20, 20, 0.25);
+    margin: 50px auto 0 auto;
+    width: 30%;
+    animation: errorFadeIn ease-out 0.5s;
+}
+
+fieldset {
+    border: none;
+}
+
+/* Change Calendar Button */
+
+.fc-state-default {
+    background: none!important;
+    color: #000!important;
+    border: none!important;
+    border-bottom: 4px solid rgba(0, 0, 0, 0)!important;
+    box-shadow: none!important;
+    text-shadow: none!important;
+}
+
+button,
+input[type='button'] {
+    background-color: rgba(0, 0, 0, 0);
+    padding: 4px 0;
+    border: none;
+    border-bottom: 4px solid rgba(0, 0, 0, 0);
+    cursor: pointer;
+    transition: 0.12s linear all;
+    font-size: 16px;
+    letter-spacing: 3px;
+    color: #ef342a;
+}
+
+.btnActive {
+    border-bottom: 4px solid #00AFF1!important;
+}
+
+button:hover,
+.fc-state-disabled,
+input[type='button']:hover {
+    border-bottom: 4px solid #ccc!important;
+}
+
+button:active,
+input[type='button']:active {
+    border-bottom: 4px solid #00AFF1!important;
+}
+
+/*#calendar button, #calendar .btnActive { border-bottom: none!important; }*/
+
+#header {
+    <<<<<<< HEAD: s2-first_draft/style.css display: inline-block;
+    width: 100%;
+    height: 56px;
+    background-position: center;
+    background: url('src/headerTransition.png') no-repeat center, linear-gradient(90deg, #eee, #eee 49.9%, #00AFF1 50.1%) no-repeat;
+    text-align: center;
+    box-shadow: 0 -6px 10px 6px rgba(20, 20, 20, 0.5);
+    =======display: inline-block;
+    width: 100%;
+    height: 56px;
+    background-position: center;
+    background: url('../src/headerTransition.png') no-repeat center, linear-gradient(90deg, #eee, #eee 49.9%, #00AFF1 50.1%) no-repeat;
+    text-align: center;
+    box-shadow: 0 -6px 10px 6px rgba(20, 20, 20, 0.5);
+    > > > > > > > origin/master: s2-first_draft/css/style.css
+}
+
+.wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: inherit;
+    width: inherit;
+    text-align: left;
+}
+
+.seprote {
+    margin: auto 0;
+    height: 56px;
+    display: inline-block;
+}
+
+.iut {
+    margin: auto 0;
+    height: 56px;
+    display: inline-block;
+    z-index: 99;
+}
+
+#menuBar {
+    display: table;
+    height: 50px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #fcfcfc;
+    box-shadow: 0 -6px 10px 6px rgba(20, 20, 20, 0.5);
+}
+
+#menuBar ul {
+    height: inherit;
+    text-align: center;
+    display: table;
+    margin: 0 auto;
+}
+
+#menuBar ul li {
+    display: inline-block;
+    height: inherit;
+    line-height: 50px;
+    font-size: 20px;
+}
+
+.itemName {
+    display: table-cell;
+    padding: 0 20px;
+    vertical-align: middle;
+    text-decoration: none;
+    font-size: 100%;
+    color: #222;
+    transition: all 0.15s linear;
+}
+
+.itemName:hover {
+    color: #fafafa;
+    text-shadow: 0 0 10px #333;
+}
+
+/*MAIN*/
+
+.mainWrap {
+    display: table;
+    width: 100%;
+    height: 100%;
+    padding: 2vh 0 0 0;
+    text-align: center;
+}
+
+.bonjour {
+    display: table-row;
+    width: inherit;
+    height: 40px;
+    font-size: 300%;
+}
+
+#content {
+    display: table;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+#right {
+    width: 60%;
+}
+
+#left,
+#right {
+    display: inline-block;
+    /*table-cell;*/
+    vertical-align: middle;
+}
+
+#chart {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+
+/* tableau */
+
+#chart table {
+    width: 600px;
+    height: 500px;
+    border-collapse: collapse;
+}
+
+#chart td {
+    width: 50%;
+    text-align: center;
+    font-size: 24px;
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+#chart table tr td:first-child {
+    font-weight: bold;
+}
+
+
+.selection {
+    display: table;
+    width: 100%;
+}
+
+.selection > button {
+    display: table-cell;
+    width: 33%;
+}
+
+.tabBtn {
+    cursor: forbidden;
+}
+
+
+#calendar {
+    width: 105%;
+    transform: scale(0.85);
+}
+
+/*Gestion des comptes*/
+
+.accInput {
+    margin: 20px auto 0 auto;
+    background-color: #fff;
+    padding: 10px 0;
+}
+
+.accInput input {
+    margin: 0 5px;
+}
+
+.accInput select {
+    height: 28px
+}
+
+.submitBtn {
+    padding: 3px 7px;
+}
+
+table#ListeComptes {
+    margin: 20px auto 0 auto;
+}
+
+#ListeComptes tr:nth-child(even) {
+    background-color: rgba(235, 235, 235, 1);
+}
+
+#ListeComptes tr:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+#ListeComptes th {
+    padding: 10px 0;
+    background-color: #00AFF1;
+    color: white;
+}
+
+#ListeComptes th,
+#ListeComptes td {
+    padding-left: 10px;
+}
+
+/* GestionHeure */
+
+.formHour button {
+    padding: 20px 20px 10px 20px;
+    margin: 0 10px;
+}
+
+.formHour {
+    border: 4px solid #00AFF1;
+    width: 450px;
+    margin: 20px auto 40px auto;
+    padding: 20px 0 10px 0;
+    text-align: center;
+}
+
+/* GestionProgrammes */
+
+.gestProgBtn {
+    margin: 20px auto 0 auto;
+}
+
+.gestProgBtn button,
+.GEST_PROG input[type='button'] {
+    padding: 20px 20px 10px 20px;
+    margin: 0 10px;
+}
+
+.GEST_PROG a {
+    color: #0099ff;
+    transition: color 0.1s linear;
+}
+
+.GEST_PROG a:hover {
+    color: #ff6600;
+}
+
+/*#create_prog*/
+
+.blueBorder {
+    border: 4px solid #00AFF1;
+    width: 450px;
+    margin: 0 auto 40px auto;
+    padding-bottom: 20px;
+}
+
+.actionList {
+    margin: 0 auto 40px auto;
+    text-align: center;
+}
+
+.actionList th {
+    font-size: 24px;
+    padding: 10px 0;
+}
+
+.actionList tr td input:nth-child(2) {
+    margin: 0 30px;
+}
+
+/* Visualisation Programme */
+
+.visualMain {
+    width: 80%;
+    margin: 30px auto 0 auto;
+}
+
+.visualMain tr {
+    margin: 0 auto;
+    display: table;
+    width: 100%;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.visualMain th {
+    padding: 1px 20px;
+}
+
+.visualMain td {
+    padding: 1px 20px;
+    width: 20%;
+}
+
+.visualSem {
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.visualPer {
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.visualValNames {
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.visualValues {
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+/*END MAIN*/
+
+footer {
+    display: table;
+    height: 25px;
+    margin-top: 10px;
+}
+
+.aPropos {
+    margin-left: 10px;
+}
+
+.separator {
+    margin: 0 10px;
+}
