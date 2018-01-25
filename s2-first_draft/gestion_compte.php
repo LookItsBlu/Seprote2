@@ -2,7 +2,6 @@
 
 session_start();
 require_once "BDD.php";
-
 $ROLE = array("1" => "Administrateur" , "2" => "Gestionnaire" ,"3" => "Professeur");
 
 if($_SESSION['role'] < 2){
@@ -72,12 +71,9 @@ if($_SESSION['role'] < 2){
 			}
 
 			if($_POST['type_form'] == 3){
-
-				if(isset($_POST['delete'])){
-					foreach($_POST['delete'] as $id){
-						$req_delete = $bdd->prepare("DELETE FROM utilisateur WHERE id_u = :id");
-						$req_delete->execute(array( "id" => intval($id) ));
-					}
+                if(isset($_POST["id"])){
+                    $req_delete = $bdd->prepare("DELETE FROM utilisateur WHERE id_u = :id");
+                    $req_delete->execute(array( "id" => intval($_POST["id"]) ));
 				}
 			}
 		}
@@ -149,10 +145,10 @@ if($_SESSION['role'] < 2){
 							 echo htmlspecialchars($ROLE[$donnees['id_role']]);
 							 echo '</td>';
 							 echo '<td>';
-							 echo "<input name='edit' type='button' value='Editer' id=".htmlspecialchars($donnees['id_u']).">";
+							 echo "<input name='edit' type='button' value='Éditer' id=".htmlspecialchars($donnees['id_u']).">";
 							 echo '</td>';
 							 echo '<td>';
-							 echo "<input name='delete[]' type='checkbox' value=".htmlspecialchars($donnees['id_u']).">";
+							 echo "<input name='delete' type='button' value='Supprimer' id='delete".htmlspecialchars($donnees['id_u'])."'>";
 							 echo '</td>';
 							 echo '</tr>';
 
@@ -162,40 +158,34 @@ if($_SESSION['role'] < 2){
 
                                     <div id="dialog_edit" title="Edition de compte">
                                         <p class="validateTips">Tous les champs sont nécessaires.</p>
-                                        <form></form>
-                                        <form name="edit_compte" id="editCompte" method="POST" action="gestion_compte.php">
+                                            <form name="edit_compte" id="editCompte" method="POST" action="gestion_compte.php">
+                                                <label for="nom">Nom:</label>
+                                                <input type="text" name="nom" id="nom" class="text ui-widget-content ui-corner-all">
+                                                <br>
+                                                <label for="date_fin">Prénom:</label>
+                                                <input type="text" name="prenom" id="prenom" class="text ui-widget-content ui-corner-all">
+                                                <br>
+                                                <label for="mail">Mail:</label>
+                                                <input type="text" name="mail" id="mail" class="text ui-widget-content ui-corner-all">
+                                                <br>
+                                                <label for="role">Rôle:</label>
+                                                <select name="role">
+                                                <option value=""></option>
+                                                <option value="1">Administrateur</option>
+                                                <option value="2">Gestionnaire</option>
+                                                <option value="3">Professeur</option>
+                                            </select>
+                                                <br>
 
-                                            <label for="nom">Nom:</label>
-                                            <input type="text" name="nom" id="nom" class="text ui-widget-content ui-corner-all">
-                                            </br>
-                                            <label for="date_fin">Prénom:</label>
-                                            <input type="text" name="prenom" id="prenom" class="text ui-widget-content ui-corner-all">
-                                            </br>
-                                            <label for="mail">Mail:</label>
-                                            <input type="text" name="mail" id="mail" class="text ui-widget-content ui-corner-all">
-                                            </br>
-                                            <label for="role">Rôle:</label>
-                                            <select name="role">
-								  	<option value=""></option>
-								  	<option value="1">Administrateur</option>
-								  	<option value="2">Gestionnaire</option>
-								  	<option value="3">Professeur</option>
-								  </select>
-                                            </br>
-
-                                            <input type="hidden" id="id" name="id" value="">
-                                            <input type="hidden" name='type_form' value='2'>
-
-
+                                                <input type="hidden" id="id" name="id" value="">
+                                                <input type="hidden" name='type_form' value='2'>
                                         </form>
-                                    </div>
 
+                                    </div>
 
                             </tbody>
                         </form>
                     </table>
-
-                    <input type="button" id="delete_button" value="Supprimer le(s) compte(s)">
 
 
                     <!-- *********** FORMULAIRE AJOUT UTILISATEUR ****************-->
@@ -268,21 +258,17 @@ if($_SESSION['role'] < 2){
                     },
 
                     "Annuler": function() {
-
                         $(this).dialog("close");
-
                     }
-
                 }
-
             });
-
         });
 
-        $("#delete_button").click(function() {
-
-            if (confirm("Voulez-vous vraiment supprimer ces comptes ?")) {
-
+        $("input[name='delete']").click(function() {
+            if (confirm("Voulez-vous vraiment supprimer ce compte ?")) {
+                var idd = $(this)[0].id;
+                var y = idd.substring('6', idd.length);
+                $("#id").val(y);
                 $("#delete_users").submit();
             }
         });
