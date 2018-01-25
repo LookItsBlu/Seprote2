@@ -88,48 +88,49 @@ if($_SESSION['role'] < 2){
 		?>
 
 
-		<?php include('menu.php'); ?>
+    <?php include('menu.php'); ?>
 
-		<div id="main">
-			<div class="mainWrap">
-				<div id="content">
-					<?php
+    <div id="main">
+        <div class="mainWrap">
+            <div id="content">
+                <?php
 
 						$req_compte = $bdd->query("SELECT id_u,nom,prenom,mail,id_role FROM utilisateur");
 					?>
-					<div class="accInput">
-						<form action="#" method="POST">
-							<input name="nom" placeholder="nom" type="text">
-							<input name="prenom" placeholder="prenom" type="text">
-							<input name="mail" placeholder="mail" type="text">
-							<select name="id_role" type="text">
-								<option value="1">administrateur</option>
-								<option value="2">gestionaire</option>
-								<option value="3">professeur</option>
+                    <div class="row">
+                        <div class="col-md-offest-1 col-md-10 accInput">
+                            <form action="#" method="POST">
+                                <input name="nom" placeholder="Nom" type="text">
+                                <input name="prenom" placeholder="Prénom" type="text">
+                                <input name="mail" placeholder="Adresse mail" type="text">
+                                <select name="id_role" type="text">
+								<option value="1">Administrateur</option>
+								<option value="2">Gestionaire</option>
+								<option value="3">Professeur</option>
 							</select>
-							<input type="password" name="mdp" placeholder="mot de passe">
-							<button class="submitBtn" value="Créer" type="submit">Ajouter</button>
-							<input type='hidden' name='type_form' value='1'></td>
-						</form>
-					</div>
+                                <input type="password" name="mdp" placeholder="Mot de passe">
+                                <button class="submitBtn" value="Créer" type="submit">Ajouter</button>
+                                <input type='hidden' name='type_form' value='1'>
+                            </form>
+                        </div>
+                    </div>
+                    <table id="ListeComptes" class="col-md-offest-1 col-md-10">
+                        <form id="delete_users" method="POST" action="#">
+                            <input type='hidden' name='type_form' value='3'>
+                            <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Prénom</th>
+                                    <th>Adresse mail</th>
+                                    <th>Rôle</th>
+                                    <th>Editer</th>
+                                    <th>Supprimer</th>
+                                </tr>
+                            </thead>
 
-					<table id="ListeComptes" class="tablesorter">
-						<form id="delete_users" method="POST" action="#">
-						<input type='hidden' name='type_form' value='3'>
-						<thead>
-						<tr>
-							<th>Nom</th>
-							<th>Prénom</th>
-							<th>Adresse mail</th>
-							<th>Rôle</th>
-							<th>Editer</th>
-							<th>Supprimer</th>
-						</tr>
-						</thead>
 
-
-						<tbody>
-					<?php
+                            <tbody>
+                                <?php
 
 						/***************** AFFICHAGE DES COMPTES *********************/
 
@@ -159,47 +160,47 @@ if($_SESSION['role'] < 2){
 
 						/***************** BOITE DIALOGUE EDITION *******************/?>
 
-						<div id="dialog_edit" title="Edition de compte">
-                            <p class="validateTips">Tous les champs sont nécessaires.</p>
-                            <form></form>
-                             <form name="edit_compte" id="editCompte" method="POST" action="gestion_compte.php">
+                                    <div id="dialog_edit" title="Edition de compte">
+                                        <p class="validateTips">Tous les champs sont nécessaires.</p>
+                                        <form></form>
+                                        <form name="edit_compte" id="editCompte" method="POST" action="gestion_compte.php">
 
-								  <label for="nom">Nom:</label>
-								  <input type="text" name="nom" id="nom"  class="text ui-widget-content ui-corner-all">
-								   </br>
-								  <label for="date_fin">Prénom:</label>
-								  <input type="text" name="prenom" id="prenom"  class="text ui-widget-content ui-corner-all">
-								   </br>
-								  <label for="mail">Mail:</label>
-								  <input type="text" name="mail" id="mail"  class="text ui-widget-content ui-corner-all">
-								  </br>
-									<label for="role">Rôle:</label>
-								   <select name="role">
+                                            <label for="nom">Nom:</label>
+                                            <input type="text" name="nom" id="nom" class="text ui-widget-content ui-corner-all">
+                                            </br>
+                                            <label for="date_fin">Prénom:</label>
+                                            <input type="text" name="prenom" id="prenom" class="text ui-widget-content ui-corner-all">
+                                            </br>
+                                            <label for="mail">Mail:</label>
+                                            <input type="text" name="mail" id="mail" class="text ui-widget-content ui-corner-all">
+                                            </br>
+                                            <label for="role">Rôle:</label>
+                                            <select name="role">
 								  	<option value=""></option>
 								  	<option value="1">Administrateur</option>
 								  	<option value="2">Gestionnaire</option>
 								  	<option value="3">Professeur</option>
 								  </select>
-								  </br>
+                                            </br>
 
-								  <input type="hidden"  id="id" name="id" value="">
-								  <input type="hidden" name='type_form' value='2'>
-
-
-                             	</form>
-                          	</div>
+                                            <input type="hidden" id="id" name="id" value="">
+                                            <input type="hidden" name='type_form' value='2'>
 
 
-							</tbody>
-							</form>
-						</table>
-
-						<input type="button" id="delete_button" value="Supprimer le(s) compte(s)">
+                                        </form>
+                                    </div>
 
 
-						<!-- *********** FORMULAIRE AJOUT UTILISATEUR ****************-->
+                            </tbody>
+                        </form>
+                    </table>
 
-						<!-- <form action='#' method='POST'>
+                    <input type="button" id="delete_button" value="Supprimer le(s) compte(s)">
+
+
+                    <!-- *********** FORMULAIRE AJOUT UTILISATEUR ****************-->
+
+                    <!-- <form action='#' method='POST'>
 							<table>
 								<tr>
 									<th>Nom</th>
@@ -225,68 +226,69 @@ if($_SESSION['role'] < 2){
 							</table>
 						</form>	-->
 
-						<?php if(isset($ERROR)) { ?>
+                    <?php if(isset($ERROR)) { ?>
 
-						<div class="ui-widget">
-							<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">
-								<p>
-									<span class="ui-icon ui-icon-alert"
-										style="margin-right: .3em;"></span>
-									<strong>ERREUR: </strong> <?php echo $ERROR ?>
-								</p>
-							</div>
-						</div>
+                    <div class="ui-widget">
+                        <div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">
+                            <p>
+                                <span class="ui-icon ui-icon-alert" style="margin-right: .3em;"></span>
+                                <strong>ERREUR: </strong>
+                                <?php echo $ERROR ?>
+                            </p>
+                        </div>
+                    </div>
 
-						<?php } ?>
+                    <?php } ?>
 
-				</div>
-			</div>
-		</div>
+            </div>
+        </div>
+    </div>
 
-		<script>
-			$("#ListeComptes").tablesorter();
-			$("#dialog_edit").hide();
-			$("input[name='edit']").click(function(){
+    <script>
+        $("#ListeComptes").tablesorter();
+        $("#dialog_edit").hide();
+        $("input[name='edit']").click(function() {
 
-				var x = $(this).attr("id");
-				$("#nom").val($("#name"+x).text());
-				$("#prenom").val($("#pname"+x).text());
-				$("#id").val(x);
-				$("#mail").val($("#mail"+x).text());
-				$("#id").val(x);
-				$("#dialog_edit").dialog({
+            var x = $(this).attr("id");
+            $("#nom").val($("#name" + x).text());
+            $("#prenom").val($("#pname" + x).text());
+            $("#id").val(x);
+            $("#mail").val($("#mail" + x).text());
+            $("#id").val(x);
+            $("#dialog_edit").dialog({
 
-				  modal: true,
-				  height: 400,
-				  width: 350,
+                modal: true,
+                height: 400,
+                width: 350,
 
-				  buttons: {
+                buttons: {
 
-				    "Modifier": function() {
-				    	$("#editCompte").submit();
-				    },
+                    "Modifier": function() {
+                        $("#editCompte").submit();
+                    },
 
-				    "Annuler": function() {
+                    "Annuler": function() {
 
-				      $( this ).dialog( "close" );
+                        $(this).dialog("close");
 
-				    }
+                    }
 
-				  }
+                }
 
-				});
+            });
 
-			});
+        });
 
-			$("#delete_button").click(function(){
+        $("#delete_button").click(function() {
 
-				if(confirm("Voulez-vous vraiment supprimer ces comptes ?")){
+            if (confirm("Voulez-vous vraiment supprimer ces comptes ?")) {
 
-					$("#delete_users").submit();
-				}
-			});
-		</script>
-		<?php
+                $("#delete_users").submit();
+            }
+        });
+
+    </script>
+    <?php
 		}
 
 		else header('Location: login.php');
