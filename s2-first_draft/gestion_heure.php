@@ -1,10 +1,10 @@
 <?php
 	session_start();
-	require_once "BDD.php";
-	include('header.php');
+	require_once "bdd/BDD.php";
+	include('includes/header.php');
 
 	if(!empty($_SESSION['id']) && $_SESSION['role'] < 3){ // On est connecter
-	   include('menu.php');
+	   include('includes/menu.php');
 
        /**** LISTE DES PROGRAMMES *****/
 
@@ -76,5 +76,5 @@
 <?php
     } else { header('Location: login.php'); }
 
-	include('footer.php');
+	include('includes/footer.php');
 ?>

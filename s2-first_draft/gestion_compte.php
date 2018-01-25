@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require_once "BDD.php";
+require_once "bdd/BDD.php";
 
 $ROLE = array("1" => "Administrateur" , "2" => "Gestionnaire" ,"3" => "Professeur");
 
@@ -82,13 +82,13 @@ if($_SESSION['role'] < 2){
 			}
 		}
 
-		include('header.php');
+		include('includes/header.php');
 
 			if(!empty($_SESSION['id'])){ // On est connecté
 		?>
 
 
-		<?php include('menu.php'); ?>
+		<?php include('includes/menu.php'); ?>
 
 		<div id="main">
 			<div class="mainWrap">
@@ -291,7 +291,7 @@ if($_SESSION['role'] < 2){
 
 		else header('Location: login.php');
 
-		include('footer.php');
+		include('includes/footer.php');
 }
 else header('Location: index.php')
 

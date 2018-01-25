@@ -1,13 +1,12 @@
-<!-- Anthony -->
 <?php
 	session_start();
 
-    require_once "BDD.php";
+    require_once "bdd/BDD.php";
 
-	include('header.php');
+	include('includes/header.php');
 
 	if(!empty($_SESSION['id'])){ // On est connecter
-	   include('menu.php');
+	   include('includes/menu.php');
 ?>
 
 <div id="main">
@@ -46,11 +45,11 @@
     </div>
 </div>
 
-<script src="googlechart.js"></script>
+<script src="js/googlechart.js"></script>
 
 <?php
     } else { header('Location: login.php'); }
 
 
-	include('footer.php');
+	include('includes/footer.php');
 ?>

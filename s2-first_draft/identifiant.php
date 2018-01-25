@@ -1,6 +1,0 @@
-<?php
-
-	$user = "root";
-	$pass = "";
-
-?>
