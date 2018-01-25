@@ -1,5 +1,5 @@
 <?php session_start();
-	include('header.php');
+	include('includes/header.php');
 ?>
 
 <div class="loginWrap">
@@ -19,8 +19,8 @@
 	</form>
 
 <?php
-	require_once "Error.php";
-	require_once "BDD.php";
+	require_once "lib/php/Error.php";
+	require_once "bdd/BDD.php";
 
 	if(!isset($_SESSION['id']) || !isset($_SESSION['nom']) || !isset($_SESSION['prenom']) || !isset($_SESSION['role'])){
 		if(empty($_POST['login']) || empty($_POST['mdp'])){
@@ -53,4 +53,4 @@
 
 </div>
 
-<?php include('footer.php'); ?>
+<?php include('includes/footer.php'); ?>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "BDD.php";
+require_once "bdd/BDD.php";
 
 /************ RECUPERATION DES ELEMENTS NECESSAIRES A LA CREATION DE PROGRAMMES ***********/
 
@@ -55,8 +55,8 @@ while($donnees = $req_module->fetch()){
 
 if($_SESSION['role'] < 3 && isset($_SESSION['id'])){
 
-include('header.php');
-include('menu.php');
+include('includes/header.php');
+include('includes/menu.php');
 ?>
 
 <div id="main">
@@ -84,7 +84,7 @@ include('menu.php');
 			<!--           FORMULAIRE CREATION DE PROGRAMME             -->
 
 			<div class="blueBorder" id="create_prog">
-				<form action="creation_programme.php" method="POST">
+				<form action="php/creation_programme.php" method="POST">
 
 					<!-- ETAPE NUMERO 1 -->
 					<div id="1">
@@ -188,7 +188,7 @@ include('menu.php');
 			<!--		BOITE DE DIALOGUE CREATION ANNEE		-->
 			<div id="dialog_annee" title="Création nouvelle année">
 				<p class="validateTips">Tous les champs sont nécessaires.</p>
-				<form name="send_annee" method="POST" action="traitement.php">
+				<form name="send_annee" method="POST" action="php/traitement.php">
 					<fieldset>
 						<label for="date_d">Date de début</label><br>
 						<input type="date" name="date_d" id="dat_deb"  class="text ui-widget-content ui-corner-all"><br><br>
@@ -201,7 +201,7 @@ include('menu.php');
 
 		<div  class="blueBorder" id="modify_prog">
 
-				<form action="modification_programme.php" method="POST">
+				<form action="php/modification_programme.php" method="POST">
 					<h3>Choisir un programme</h3>
 					<select id='id_prog_modif' name="id_prog_modif">
 						<option value=""></option>
@@ -372,7 +372,7 @@ include('menu.php');
 			var params = "id_per=" + $("#prog_p").val() + "&id_mod=" + $("#p_module").val();
 			$.ajax({
 				type: 'POST',
-				url: 'ajaxaffectmod.php',
+				url: 'js/ajax/ajaxaffectmod.php',
 				data: params,
 				success: ajaxOK
 			});
@@ -382,7 +382,7 @@ include('menu.php');
 			var params = "id_m=" + $("#module").val() + "&nom_m="+ encodeURIComponent($("#m_nom_mod").val()) + "&code_m=" +  $("#m_code_mod").val() + "&cm_g=" +  $("#m_cm_mod").val() + "&td_g=" + $("#m_td_mod").val() + "&tp_g=" +  $("#m_tp_mod").val();
 			$.ajax({
 				type: 'POST',
-				url: 'ajaxmodifymodfinal.php',
+				url: 'js/ajax/ajaxmodifymodfinal.php',
 				data: params,
 				success: ajaxOK
 			});
@@ -393,7 +393,7 @@ include('menu.php');
 			var params = "id_prog=" + $("#prog").val();
 			$.ajax({
 				type: 'POST',
-				url: 'ajaxprog.php',
+				url: 'js/ajax/ajaxprog.php',
 				data: params,
 				success: ajaxOKprog
 			});
@@ -403,7 +403,7 @@ include('menu.php');
 			var params = "id_sem=" + $("#prog_sem").val();
 			$.ajax({
 				type: 'POST',
-				url: 'ajaxsem.php',
+				url: 'js/ajax/ajaxsem.php',
 				data: params,
 				success: ajaxOKsem
 			});
@@ -413,7 +413,7 @@ include('menu.php');
 			var params = "id_mod=" + $("#module").val();
 			$.ajax({
 				type: 'POST',
-				url: 'ajaxmodifymod.php',
+				url: 'js/ajax/ajaxmodifymod.php',
 				data: params,
 				success: ajaxOKmodifymod
 			});
@@ -423,7 +423,7 @@ include('menu.php');
 			var params = "id_prog=" + $("#id_prog_modif").val();
 			$.ajax({
 				type: 'POST',
-				url: 'ajaxmodifyprog.php',
+				url: 'js/ajax/ajaxmodifyprog.php',
 				data: params,
 				success: ajaxOKmodifyprog
 			});
@@ -494,7 +494,7 @@ include('menu.php');
 		var params = "id_prog=" + $("#prog").val();
 			$.ajax({
 				type: 'POST',
-				url: 'ajaxvisualprog.php',
+				url: 'js/ajax/ajaxvisualprog.php',
 				data: params,
 				success: ajaxOKrecaptab
 			});
@@ -540,7 +540,7 @@ include('menu.php');
 						var params = "nom_for=" + $("#nom_for").val() + "&id_a=" + $("#for_annee").val() + "&group_td=" + $("#nb_td").val() + "&group_tp=" + $("#nb_tp").val();
 						$.ajax({
 							type: 'POST',
-							url: 'ajaxformation.php',
+							url: 'js/ajax/ajaxformation.php',
 							data: params,
 							success: ajaxOKformation
 						});
@@ -572,7 +572,7 @@ include('menu.php');
 						var params = "date_d=" + $("#dat_deb").val() + "&date_fin=" + $("#dat_fin").val();
 						$.ajax({
 							type: 'POST',
-							url: 'ajaxannee.php',
+							url: 'js/ajax/ajaxannee.php',
 							data: params,
 							success: ajaxOKannee
 						});
@@ -604,7 +604,7 @@ include('menu.php');
 						var params = "nom_mod=" + $("#nom_mod").val() + "&code_mod=" + $("#code_mod").val() + "&cm_g=" + $("#cm_g").val() + "&td_g=" + $("#td_g").val() + "&tp_g=" + $("#tp_g").val();
 						$.ajax({
 							type: 'POST',
-							url: 'ajaxmodule.php',
+							url: 'js/ajax/ajaxmodule.php',
 							data: params,
 							success: ajaxOKmodule
 						});
@@ -621,4 +621,4 @@ include('menu.php');
 		});
 	});
 </script>
-<?php include('footer.php');} else {header('location: login.php');}?>
+<?php include('includes/footer.php');} else {header('location: login.php');}?>
