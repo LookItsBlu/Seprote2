@@ -15,13 +15,12 @@
             <form method="POST" action="login.php" id="loginForm">
                 <input type="text" placeholder="Adresse e-mail" name="login" />
                 <input type="password" placeholder="Mot de passe" name="mdp" />
-                <button type="input">Connexion</button>
+                <button type="submit">Connexion</button>
             </form>
         </div>
     </div>
 </div>
 
-<script src="js/notifications.js"></script>
 <script src="js/ajax/checkLogin.js"></script>
 
 <?php include('includes/footer.php'); ?>

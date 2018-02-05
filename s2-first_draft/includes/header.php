@@ -5,7 +5,6 @@
     <title>Seprote IUT Calais Boulogne</title>
 
     <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Product+Sans:400,400i,700,700i'>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="bootstrap-4.0.0-dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="bootstrap-4.0.0-dist/css/bootstrap-grid.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -27,7 +26,6 @@
     <script type="text/javascript" src="css/fullcalendar-3.1.0/lib/moment.min.js"></script>
     <script type="text/javascript" src="css/fullcalendar-3.1.0/fullcalendar.js"></script>
     <script type="text/javascript" src="css/fullcalendar-3.1.0/locale/fr.js"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="bootstrap-4.0.0-dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="bootstrap-4.0.0-dist/js/bootstrap.bundle.min.js"></script>
 
@@ -36,7 +34,9 @@
     <script type="text/javascript" src="lib/js/notificationDrawer/notificationItem.js"></script>
     <script type="text/javascript" src="lib/js/notificationDrawer/notificationDrawer.js"></script>
 
-    <script src="js/script.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+
+    <script type="text/javascript" src="js/notifications.js"></script>
 </head>
 
 <body>
