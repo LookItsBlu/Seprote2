@@ -18,16 +18,16 @@ $(document).ready(function(){
                     window.location.href = 'index.php';
                 }
                 else if(code == 0) {
-                    message.title = 'Connexion Impossible';
-                    message.body = 'Login ou Mot de Passe Incorrect';
+                    message.title = 'Login ou Mot de Passe Incorrect';
+                    message.body = 'Connexion Impossible, veuillez réessayer';
                 }
                 else if(code == -1) {
-                    message.title = 'Connexion Impossible';
-                    message.body = "L'un des 2 champs est vide";
+                    message.title = 'Champ(s) vide';
+                    message.body = 'Connexion Impossible, veuillez réessayer';
                 }
 
                 if(!$.isEmptyObject(message)) {
-                    notif.sendNotification( 'error', message, 2000 );
+                    notif.sendNotification( 'error', message, 5000 );
                 }
             }
         });
