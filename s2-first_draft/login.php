@@ -2,18 +2,22 @@
 	include('includes/header.php');
 ?>
 
+<link rel="stylesheet" type="text/css" href="css/login.css">
+
 <div class="loginWrap">
     <img class="loginSeprote" src="src/seprote.png" alt="Seprote" />
     <div class="loginIutImg">
         <img class="loginIut" src="src/iut.png" alt="IUT Calais Boulogne" />
     </div>
-    <div class="row">
-        <div class="form_connex col-md-offset-3 col-md-6">
-            <form method="POST" action="login.php" id="loginForm">
-                <input type="text" placeholder="Adresse e-mail" name="login" />
-                <input type="password" placeholder="Mot de passe" name="mdp" />
-                <button type="input">Connexion</button>
-            </form>
+    <div class="container">
+        <div class="row">
+            <div class="form_connex col-md-offset-3 col-md-6">
+                <form method="POST" action="login.php" id="loginForm">
+                    <input type="text" placeholder="Adresse e-mail" name="login" />
+                    <input type="password" placeholder="Mot de passe" name="mdp" />
+                    <button type="input">Connexion</button>
+                </form>
+            </div>
         </div>
     </div>
 
