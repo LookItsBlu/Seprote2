@@ -9,13 +9,12 @@
     <link rel="stylesheet" type="text/css" href="bootstrap-4.0.0-dist/css/bootstrap-grid.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.12.1.custom/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="css/login.css">
     <link rel="stylesheet" type="text/css" href="css/tablesorter/themes/blue/style.css">
     <link rel="stylesheet" type="text/css" href="css/fullcalendar-3.1.0/fullcalendar.css">
     <link rel="stylesheet" type="text/css" href="css/materialFullCalendar.css">
 
     <!-- Jquery Libs -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="jquery/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="css/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 
     <!-- Loading google chart library -->
