@@ -260,21 +260,21 @@ table#ListeComptes {
     margin: 20px auto 0 auto;
 }
 
-#ListeComptes tr:nth-child(even) {
+.sep_table tr:nth-child(even) {
     background-color: rgba(235, 235, 235, 1);
 }
 
-#ListeComptes tr:nth-child(odd) {
+.sep_table tr:nth-child(odd) {
     background-color: rgba(255, 255, 255, 1);
 }
 
-#ListeComptes th {
+.sep_table th {
     background-color: #00AFF1;
     color: white;
 }
 
-#ListeComptes th,
-#ListeComptes td {
+.sep_table th,
+.sep_table td {
     padding-left: 10px;
     height: 36px;
 }
@@ -408,10 +408,9 @@ footer {
 .zone {
     background-color: #fff;
     display: inline-flex;
-    height: 100vh;
+    height: 100%;
     border-radius: 5px;
     margin: 0 5px;
-    min-width: 10%;
     overflow-x: auto;
 }
 
@@ -421,4 +420,26 @@ footer {
 
 .zone_table {
     width: 50%;
+}
+
+.form_table tbody tr:nth-child(even) {
+    background-color: rgba(235, 235, 235, 1);
+}
+
+.form_table tbody tr:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.form_table thead tr {
+    background-color: #c1c1c1;
+}
+
+.sep_table td:first-child {
+    padding-left: 20px;
+}
+
+.cursor_drag {
+    width: 10px;
+    background-color: red;
+    height: 100%;
 }

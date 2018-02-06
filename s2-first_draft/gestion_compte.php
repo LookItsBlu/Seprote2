@@ -119,7 +119,7 @@ if($_SESSION['role'] < 2){
                         </div>
 
                         <div class="row">
-                            <table id="ListeComptes" class="col-md-12">
+                            <table id="ListeComptes" class="sep_table col-md-12">
                                 <form id="delete_users" method="POST" action="#">
                                     <input type='hidden' name='type_form' value='3'>
                                     <thead>
