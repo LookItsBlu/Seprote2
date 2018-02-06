@@ -6,14 +6,12 @@
 
 body {
     font-family: 'Product Sans', Arial, sans-serif;
-    background-color: #fafafa;
-    display: table;
+    background-color: #eee;
     width: 100%;
     height: 100vh;
 }
 
 body > div {
-    display: table-row;
     height: 100%;
 }
 
@@ -91,21 +89,13 @@ input[type='button']:active {
 /*#calendar button, #calendar .btnActive { border-bottom: none!important; }*/
 
 #header {
-    <<<<<<< HEAD: s2-first_draft/style.css display: inline-block;
-    width: 100%;
-    height: 56px;
-    background-position: center;
-    background: url('src/headerTransition.png') no-repeat center, linear-gradient(90deg, #eee, #eee 49.9%, #00AFF1 50.1%) no-repeat;
-    text-align: center;
-    box-shadow: 0 -6px 10px 6px rgba(20, 20, 20, 0.5);
-    =======display: inline-block;
+    display: inline-block;
     width: 100%;
     height: 56px;
     background-position: center;
     background: url('../src/headerTransition.png') no-repeat center, linear-gradient(90deg, #eee, #eee 49.9%, #00AFF1 50.1%) no-repeat;
     text-align: center;
     box-shadow: 0 -6px 10px 6px rgba(20, 20, 20, 0.5);
-    > > > > > > > origin/master: s2-first_draft/css/style.css
 }
 
 .wrap {
@@ -171,7 +161,7 @@ input[type='button']:active {
 /*MAIN*/
 
 .mainWrap {
-    display: table;
+    /*    display: table;*/
     width: 100%;
     height: 100%;
     padding: 2vh 0 0 0;
@@ -249,7 +239,7 @@ input[type='button']:active {
     transform: scale(0.85);
 }
 
-/*Gestion des comptes*/
+/* ----- Gestion des comptes ----- */
 
 .accInput {
     margin: 20px auto 0 auto;
@@ -257,12 +247,9 @@ input[type='button']:active {
     padding: 10px 0;
 }
 
-.accInput input {
-    margin: 0 5px;
-}
-
+.accInput input,
 .accInput select {
-    height: 28px
+    margin: 0 5px;
 }
 
 .submitBtn {
@@ -282,7 +269,6 @@ table#ListeComptes {
 }
 
 #ListeComptes th {
-    padding: 10px 0;
     background-color: #00AFF1;
     color: white;
 }
@@ -290,6 +276,7 @@ table#ListeComptes {
 #ListeComptes th,
 #ListeComptes td {
     padding-left: 10px;
+    height: 36px;
 }
 
 /* GestionHeure */
@@ -409,4 +396,29 @@ footer {
 
 .separator {
     margin: 0 10px;
+}
+
+/* ----- Liste des programmes (NEW) ----- */
+
+.main_content {
+    display: flex;
+    padding: 5px;
+}
+
+.zone {
+    background-color: #fff;
+    display: inline-flex;
+    height: 100vh;
+    border-radius: 5px;
+    margin: 0 5px;
+    min-width: 10%;
+    overflow-x: auto;
+}
+
+.zone_arbor {
+    flex: 1;
+}
+
+.zone_table {
+    width: 50%;
 }

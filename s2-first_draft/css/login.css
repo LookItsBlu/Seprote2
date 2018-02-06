@@ -1,14 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: 'Product Sans', Arial, sans-serif;
-    background-color: #eee;
-    display: table;
-}
-
 .loginWrap {
     width: inherit;
     text-align: center;
@@ -96,16 +85,7 @@ footer {
     position: absolute;
     /*bottom: 0;*/
     left: 0;
-    height: 25px;
     margin-top: -25px;
-}
-
-.aPropos {
-    margin-left: 10px;
-}
-
-.separator {
-    margin: 0 10px;
 }
 
 /* ------------ Etienne ajout ------------ */
@@ -139,7 +119,7 @@ footer {
 }
 
 .form_connex button {
-    background-color: blue;
+    background-color: #00AFF1;
     color: white;
     font-size: 24px;
     font-family: Arial, sans-serif;
