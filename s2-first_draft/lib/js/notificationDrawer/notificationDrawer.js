@@ -31,6 +31,7 @@ class notification {
 
         //this list will contain all the notification item objects in this drawer
         this.notifObjList = [];
+        this.notificationCount = 0;
 
         this.notifDrawer = document.createElement("div");
         this.notifDrawer.classList.add(this.notificationDrawerName);
@@ -63,6 +64,7 @@ class notification {
         var notifObject = new notificationItem(p.drawerDirection, p.ownerDrawer, p.drawerPadding, timer);
         this.notificationCount++;
         notifObject.notifID = this.notificationCount;
+
         this.notifObjList.push(notifObject);
 
         //create and append the displayed notification
@@ -88,16 +90,11 @@ class notification {
             e.target.style.transform = 'scale(1)';
             var drawerlist = p.notifDrawer;
 
-            //get index of clicked notification
-            var child = e.target;
-            var i = 0;
-            while( (child = child.previousSibling) != null )
-              i++;
+            p.regroupNotif(notifObject.notifID-1);
 
-            if(i>0){p.regroupNotif(i);}
-
-            p.notifObjList.splice(i, 1);
+            p.notifObjList.splice(notifObject.notifID-1, 1);
             notifObject.destroy(p.drawerDirection);
+            p.notificationCount--;
         };
 
         var mouseoutHandler = function(e){
@@ -116,6 +113,7 @@ class notification {
             function(){
                 //get index of clicked notification
                 var child = notifObject.notifHTML;
+
                 var i = 0;
                 while( (child = child.previousSibling) != null )
                   i++;
@@ -124,6 +122,7 @@ class notification {
 
                 p.notifObjList.splice(i, 1);
                 notifObject.destroy(p.drawerDirection);
+                p.notificationCount--;
             },
             notifObject.notifTimer
         );
