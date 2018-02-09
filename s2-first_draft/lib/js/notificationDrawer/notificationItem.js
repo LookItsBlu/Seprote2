@@ -21,7 +21,7 @@
 
 
 class notificationItem {
-    constructor(direction, owner, padding, timer) {
+    constructor(direction, owner, padding, css, timer) {
         this.owner = owner;
 
         this.colorError = '#ff3014';
@@ -35,10 +35,12 @@ class notificationItem {
         this.notifHeight = 125;
         this.itemPadding = padding;
 
+        this.style = css;
+
         this.notifTimer = timer;
         this.TimeoutFunc;
 
-        this.notificationHTML = "<div class='@@owner@@-notification-item'><div class='notification-content'><p class='notification-title'>@@title@@</p><p class='notification-body'>@@body@@</p></div></div>";
+        this.notificationHTML = "<div class='..owner..-notification-item'><div class='notification-content'><p class='notification-title'>..title..</p><p class='notification-body'>..body..</p></div></div>";
 
         var cssItemPos = '';
         switch(direction) {
@@ -56,17 +58,17 @@ class notificationItem {
                 break;
         }
 
-        document.styleSheets[0].insertRule("."+this.owner+"-notification-item { position: inherit; width: "+this.notifWidth+"px; height: "+this.notifHeight+"px; "+cssItemPos+" overflow: hidden; cursor: pointer; transition: transform 0.25s ease-out, right 0.25s ease-out, left 0.25s ease-out, top 0.25s ease-out, bottom 0.25s ease-out; }", 1);
+        this.style.insertRule("."+this.owner+"-notification-item { position: inherit; width: "+this.notifWidth+"px; height: "+this.notifHeight+"px; "+cssItemPos+" overflow: hidden; cursor: pointer; transition: transform 0.25s ease-out, right 0.25s ease-out, left 0.25s ease-out, top 0.25s ease-out, bottom 0.25s ease-out; }", 0);
 
-        document.styleSheets[0].insertRule(".notification-content { padding: 15px 0 0 15px; pointer-events: none; }", 1);
+        this.style.insertRule(".notification-content { padding: 15px 0 0 15px; pointer-events: none; }", 0);
 
-        document.styleSheets[0].insertRule(".notification-error { background-color: "+this.colorError+"; opacity: "+this.opacity+"; }", 1);
-        document.styleSheets[0].insertRule(".notification-confirm { background-color: "+this.colorConfirm+"; opacity: "+this.opacity+"; }", 1);
-        document.styleSheets[0].insertRule(".notification-warning { background-color: "+this.colorWarning+"; opacity: "+this.opacity+"; }", 1);
-        document.styleSheets[0].insertRule(".notification-info { background-color: "+this.colorInfo+"; opacity: "+this.opacity+"; }", 1);
+        this.style.insertRule(".notification-error { background-color: "+this.colorError+"; opacity: "+this.opacity+"; }", 0);
+        this.style.insertRule(".notification-confirm { background-color: "+this.colorConfirm+"; opacity: "+this.opacity+"; }", 0);
+        this.style.insertRule(".notification-warning { background-color: "+this.colorWarning+"; opacity: "+this.opacity+"; }", 0);
+        this.style.insertRule(".notification-info { background-color: "+this.colorInfo+"; opacity: "+this.opacity+"; }", 0);
 
-        document.styleSheets[0].insertRule(".notification-title { margin: 0; font-size: 20px; font-weight: bold; }", 1);
-        document.styleSheets[0].insertRule(".notification-body { font-size: 13px; }", 1);
+        this.style.insertRule(".notification-title { margin: 0; font-size: 20px; font-weight: bold; }", 0);
+        this.style.insertRule(".notification-body { font-size: 13px; }", 0);
     }
 
     create(notifType, data) {

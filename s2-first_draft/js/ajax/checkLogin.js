@@ -2,7 +2,7 @@ $(document).ready(function(){
     $('#loginForm').on('submit', function(e){
         e.preventDefault();
 
-        var params = 'login=@@login@@&mdp=@@mdp@@'.strcast({
+        var params = 'login=..login..&mdp=..mdp..'.strcast({
             login: e.target.login.value,
             mdp: e.target.mdp.value
         });

@@ -38,20 +38,25 @@ class notification {
         document.body.appendChild(this.notifDrawer);
         this.drawerSelector = '.'+this.notificationDrawerName;
 
+        //create css stylesheet to modify
+        var styleEl = document.createElement('style');
+        document.head.appendChild(styleEl);
+        this.styleSheet = styleEl.sheet;
+
         //position the drawer according to the given placement
         var beginningCSS = "."+this.notificationDrawerName+" { position: fixed;";
         switch(this.drawerDirection) {
             case 'topleft':
-                document.styleSheets[0].insertRule(beginningCSS+" top: "+this.drawerPadding+"px; left: "+this.drawerPadding+"px; }", 1);
+                this.styleSheet.insertRule(beginningCSS+" top: "+this.drawerPadding+"px; left: "+this.drawerPadding+"px; }", 0);
                 break;
             case 'topright':
-                document.styleSheets[0].insertRule(beginningCSS+" top: "+this.drawerPadding+"px; right: "+this.drawerPadding+"px; }", 1);
+                this.styleSheet.insertRule(beginningCSS+" top: "+this.drawerPadding+"px; right: "+this.drawerPadding+"px; }", 0);
                 break;
             case 'bottomleft':
-                document.styleSheets[0].insertRule(beginningCSS+" bottom: "+this.drawerPadding+"px; left: "+this.drawerPadding+"px; }", 1);
+                this.styleSheet.insertRule(beginningCSS+" bottom: "+this.drawerPadding+"px; left: "+this.drawerPadding+"px; }", 0);
                 break;
             case 'bottomright':
-                document.styleSheets[0].insertRule(beginningCSS+" bottom: "+this.drawerPadding+"px; right: "+this.drawerPadding+"px; }", 1);
+                this.styleSheet.insertRule(beginningCSS+" bottom: "+this.drawerPadding+"px; right: "+this.drawerPadding+"px; }", 0);
                 break;
         }
     }
@@ -61,7 +66,7 @@ class notification {
         var p = this;
 
         //create a new notificationitem object and push it to the notification list
-        var notifObject = new notificationItem(p.drawerDirection, p.ownerDrawer, p.drawerPadding, timer);
+        var notifObject = new notificationItem(p.drawerDirection, p.ownerDrawer, p.drawerPadding, p.styleSheet, timer);
         this.notificationCount++;
         notifObject.notifID = this.notificationCount;
 
