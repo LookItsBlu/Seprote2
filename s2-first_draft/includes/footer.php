@@ -20,7 +20,7 @@
 			A propos
 		</a>
 		<span class="separator">|</span>
-		<span>©Seprote 2018</span>
+		<span class="copyright">©Seprote 2018</span>
 	</footer>
 </body>
 </html>

@@ -66,7 +66,7 @@ if($_SESSION['role'] < 2){
 						"id"=> $_POST["id"],
 						"role"=> $_POST["role"]
 					));
-
+                	header('Location: gestion_compte.php');
 
 				}
 

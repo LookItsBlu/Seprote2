@@ -11,9 +11,9 @@ body {
     height: 100vh;
 }
 
-body > div {
+/* body > div {
     height: 100%;
-}
+}*/
 
 h2 {
     font-size: 34px;
@@ -163,7 +163,6 @@ input[type='button']:active {
 .mainWrap {
     /*    display: table;*/
     width: 100%;
-    height: 100%;
     padding: 2vh 0 0 0;
     text-align: center;
 }
@@ -178,7 +177,6 @@ input[type='button']:active {
 #content {
     display: table;
     width: 100%;
-    height: 100%;
     text-align: center;
 }
 
@@ -260,11 +258,11 @@ table#ListeComptes {
     margin: 20px auto 0 auto;
 }
 
-.sep_table tr:nth-child(even) {
+.sep_table tr:nth-child(odd) {
     background-color: rgba(235, 235, 235, 1);
 }
 
-.sep_table tr:nth-child(odd) {
+.sep_table tr:nth-child(even) {
     background-color: rgba(255, 255, 255, 1);
 }
 
@@ -277,6 +275,16 @@ table#ListeComptes {
 .sep_table td {
     padding-left: 10px;
     height: 36px;
+}
+
+.ui-widget.ui-widget-content {
+    border: none;
+    padding: 0;
+    borde- border-radius: 5px;
+}
+
+.ui-dialog-titlebar button {
+    display: none;
 }
 
 /* GestionHeure */
@@ -385,17 +393,16 @@ table#ListeComptes {
 /*END MAIN*/
 
 footer {
-    display: table;
-    height: 25px;
-    margin-top: 10px;
+    display: block;
+    position: fixed;
+    bottom: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 0 10px;
 }
 
-.aPropos {
-    margin-left: 10px;
-}
-
-.separator {
-    margin: 0 10px;
+footer .separator {
+    margin: 0 5px;
 }
 
 /* ----- Liste des programmes (NEW) ----- */
@@ -405,13 +412,17 @@ footer {
     padding: 5px;
 }
 
+.form_table {
+    margin: 0
+}
+
 .zone {
     background-color: #fff;
     display: inline-flex;
-    height: 100%;
     border-radius: 5px;
     margin: 0 5px;
-    overflow-x: auto;
+    overflow: auto;
+    min-width: 10%;
 }
 
 .zone_arbor {
@@ -419,7 +430,7 @@ footer {
 }
 
 .zone_table {
-    width: 50%;
+    width: 75%;
 }
 
 .form_table tbody tr:nth-child(even) {
@@ -438,8 +449,32 @@ footer {
     padding-left: 20px;
 }
 
+.zone_table .sep_table td {
+    vertical-align: middle;
+}
+
 .cursor_drag {
-    width: 10px;
-    background-color: red;
-    height: 100%;
+    display: flex;
+    cursor: col-resize;
+}
+
+.cursor_drag > img {
+    margin: auto;
+}
+
+.cursor_drag.ui-draggable-dragging > img {
+    display: none;
+}
+
+.icon_group {
+    width: 50px;
+    text-align: center;
+}
+
+img.editIcon {
+    width: 25px;
+}
+
+img.editIcon:hover {
+    opacity: 0.5;
 }

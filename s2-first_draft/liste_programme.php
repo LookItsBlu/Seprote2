@@ -14,29 +14,22 @@
                     <thead>
                         <tr>
                             <th class="titre_arbor col-sm-12">Année scolaire</th>
-                            <?php if($_SESSION['role'] < 3){ echo "<th></th><th></th><th></th>"; }?>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-    for($i=9;$i>0;$i--){
-        ?>
+                        <?php for($i=9;$i>0;$i--){ ?>
                         <tr>
-                            <td class="col_name col-sm-9">
+                            <td class="col_name">
                                 <?php echo "<a>201".$i."-201".($i-1)."</a>";?>
                             </td>
-
-                            <?php if($_SESSION['role'] < 3){ ?>
-                            <td class="renommer col-sm-1"><a>Renommer</a></td>
-                            <td class="dupliquer col-sm-1"><a>Dupliquer</a></td>
-                            <td class="supprimer col-sm-1"><a>Supprimer</a></td>
-                            <?php } ?>
                         </tr>
                         <?php } ?>
                     </tbody>
                 </table>
             </div>
-            <div class="cursor_drag"></div>
+            <div class="cursor_drag">
+                <img src="src/drag_icon.png" />
+            </div>
             <div class="zone zone_table">
                 <table class="table sep_table col-sm-12" id="table_program">
                     <thead>
@@ -44,6 +37,7 @@
                             <th>Titre1</th>
                             <th>Titre2</th>
                             <th>Titre3</th>
+                            <?php if($_SESSION['role'] < 3){ echo "<th></th><th></th><th></th>"; }?>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,6 +45,17 @@
                             <td>Info1</td>
                             <td>Info2</td>
                             <td>Info3</td>
+                            <?php if($_SESSION['role'] < 3){ ?>
+                            <td class="icon_group">
+                                <img class="editIcon icon_renom" src="src/pencil.png" alt="Renommer" title="Renommer cette ligne" />
+                            </td>
+                            <td class="icon_group">
+                                <img class="editIcon icon_dupli" src="src/copy.png" alt="Dupliquer" title="Dupliquer cette ligne" />
+                            </td>
+                            <td class="icon_group">
+                                <img class="editIcon icon_suppr" src="src/trash.png" alt="Supprimer" title="Supprimer cette ligne" />
+                            </td>
+                            <?php } ?>
                         </tr>
                         <tr>
                             <td>Info1</td>
@@ -79,6 +84,10 @@
                 next_element.width(parseInt($(this).attr('start_next_width')) + x_difference);
             }
         });
+
+        /*if ($('.zone').width() <= 50 px) {
+            ui.draggable.draggable('option', 'revert', true);
+        }*/
 
     </script>
     <?php
