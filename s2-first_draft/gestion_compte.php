@@ -14,10 +14,11 @@ if($_SESSION['role'] < 2){
 
 
 
-			if($_POST['type_form'] == 1){ // Traitement du formulaire d'ajout de compte
+			/*if($_POST['type_form'] == 1){ // Traitement du formulaire d'ajout de compte
 
 				/********* VERIFICATION DES DONNEES *********/
-				if($_POST['id_role'] != 1 && $_POST['id_role'] != 2 && $_POST['id_role'] != 3){
+                /*
+                if($_POST['id_role'] != 1 && $_POST['id_role'] != 2 && $_POST['id_role'] != 3){
 
 						$ERROR = "Id du rôle incorrect !";
 
@@ -35,10 +36,9 @@ if($_SESSION['role'] < 2){
 				}
 
 				/********** REQUETE A EFFECTUER **************/
-
+/*
 				else{
-					$req_ajout = $bdd->prepare("INSERT INTO utilisateur(nom,prenom,mail,id_role,mdp) VALUES(:nom,:prenom,:mail,:id_role,:mdp)");
-					$req_ajout->execute(array(
+ $req_ajout = $bdd->prepare("INSERT INTO utilisateur(nom,prenom,mail,id_role,mdp) VALUES(:nom,:prenom,:mail,:id_role,:mdp)");					$req_ajout->execute(array(
 						'nom' => $_POST['nom'],
 						'prenom' => $_POST['prenom'],
 						'mail' => $_POST['mail'],
@@ -52,7 +52,7 @@ if($_SESSION['role'] < 2){
 					}
 
 				}
-			}
+			}*/
 
 			if($_POST['type_form'] == 2){
 
@@ -93,25 +93,24 @@ if($_SESSION['role'] < 2){
             <div id="content">
                 <?php
 
-						$req_compte = $bdd->query("SELECT id_u,nom,prenom,mail,id_role FROM utilisateur");
+						//$req_compte = $bdd->query("SELECT id_u,nom,prenom,mail,id_role FROM utilisateur WHERE id_role >= 2");
 					?>
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12 accInput">
-                                <form action="#" method="POST">
+                                <form class='addCompte' action="#" method="POST">
                                     <div class="container">
                                         <div class="row">
                                             <input class="col-md-2" name="nom" placeholder="Nom" type="text">
                                             <input class="col-md-2" name="prenom" placeholder="Prénom" type="text">
                                             <input class="col-md-2" name="mail" placeholder="Adresse mail" type="text">
                                             <select class="col-md-2" name="id_role" type="text">
-								        <option value="1">Administrateur</option>
-								        <option value="2">Gestionaire</option>
-								        <option value="3">Professeur</option>
-                                    </select>
+                                                <option value="1">Administrateur</option>
+                                                <option value="2">Gestionaire</option>
+                                                <option value="3" selected>Professeur</option>
+                                            </select>
                                             <input class="col-md-2" type="password" name="mdp" placeholder="Mot de passe">
                                             <button class="col-md-1" class="submitBtn" value="Créer" type="submit">Ajouter</button>
-                                            <input type='hidden' name='type_form' value='1'>
                                         </div>
                                     </div>
                                 </form>
@@ -139,7 +138,7 @@ if($_SESSION['role'] < 2){
 
 						/***************** AFFICHAGE DES COMPTES *********************/
 
-						while($donnees = $req_compte->fetch()){
+						/*while($donnees = $req_compte->fetch()){
 
 							 echo "<tr class='odd'><td id='name".htmlspecialchars($donnees['id_u'])."'>";
 							 echo htmlspecialchars($donnees['nom']);
@@ -171,7 +170,7 @@ if($_SESSION['role'] < 2){
                                                     <label for="nom">Nom:</label>
                                                     <input type="text" name="nom" id="nom" class="text ui-widget-content ui-corner-all">
                                                     <br>
-                                                    <label for="date_fin">Prénom:</label>
+                                                    <label for="prenom">Prénom:</label>
                                                     <input type="text" name="prenom" id="prenom" class="text ui-widget-content ui-corner-all">
                                                     <br>
                                                     <label for="mail">Mail:</label>
@@ -252,7 +251,6 @@ if($_SESSION['role'] < 2){
             var x = $(this).attr("id");
             $("#nom").val($("#name" + x).text());
             $("#prenom").val($("#pname" + x).text());
-            $("#id").val(x);
             $("#mail").val($("#mail" + x).text());
             $("#id").val(x);
             $("#dialog_edit").dialog({
@@ -265,6 +263,7 @@ if($_SESSION['role'] < 2){
 
                     "Modifier": function() {
                         $("#editCompte").submit();
+                        console.log($(this).children('input'));
                     },
 
                     "Annuler": function() {
@@ -284,6 +283,9 @@ if($_SESSION['role'] < 2){
         });
 
     </script>
+    <script src="js/ajax/fetchCompte.js"></script>
+    <script src="js/ajax/addCompte.js"></script>
+
     <?php
 		}
 

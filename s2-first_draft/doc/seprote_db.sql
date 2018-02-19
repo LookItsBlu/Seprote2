@@ -19,6 +19,9 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `seprote`
 --
+
+DROP DATABASE IF EXISTS `seprote`;
+
 CREATE DATABASE IF NOT EXISTS `seprote` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `seprote`;
 
@@ -44,22 +47,41 @@ INSERT INTO `annee` (`id_a`, `dat_deb_a`, `dat_fin_a`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `departement`
+--
+
+CREATE TABLE IF NOT EXISTS `departement` (
+  `id_d` int(11) NOT NULL,
+  `nom_d` varchar(50) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `departement`
+--
+
+INSERT INTO `departement` (`id_d`, `nom_d`) VALUES
+(1, 'INFO');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `formation`
 --
 
 CREATE TABLE `formation` (
-  `id_for` int(11) NOT NULL,
+  `id_f` int(11) NOT NULL,
   `nom_f` varchar(50) NOT NULL,
   `group_td` int(11) DEFAULT NULL,
-  `group_tp` int(11) DEFAULT NULL
+  `group_tp` int(11) DEFAULT NULL,
+  `id_d` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `formation`
 --
 
-INSERT INTO `formation` (`id_for`, `nom_f`, `group_td`, `group_tp`) VALUES
-(1, 'Licence Pro DIM', NULL, NULL);
+INSERT INTO `formation` (`id_f`, `nom_f`, `group_td`, `group_tp`, `id_d`) VALUES
+(1, 'Licence Pro DIM', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -68,9 +90,16 @@ INSERT INTO `formation` (`id_for`, `nom_f`, `group_td`, `group_tp`) VALUES
 --
 
 CREATE TABLE `for_annee` (
-  `id_for` int(11) NOT NULL,
+  `id_f` int(11) NOT NULL,
   `id_a` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `for_annee`
+--
+
+INSERT INTO `for_annee` (`id_f`, `id_a`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -184,14 +213,14 @@ INSERT INTO `programme` (`id_prog`, `ppn`, `ppn_relie`, `prog_nom`) VALUES
 
 CREATE TABLE `prog_for` (
   `id_prog` int(11) NOT NULL,
-  `id_for` int(11) NOT NULL
+  `id_f` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Contenu de la table `prog_for`
 --
 
-INSERT INTO `prog_for` (`id_prog`, `id_for`) VALUES
+INSERT INTO `prog_for` (`id_prog`, `id_f`) VALUES
 (2, 1);
 
 -- --------------------------------------------------------
@@ -263,6 +292,24 @@ INSERT INTO `utilisateur` (`id_u`, `nom`, `prenom`, `id_role`, `mail`, `mdp`) VA
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `util_dep`
+--
+
+CREATE TABLE `util_dep` (
+  `id_u` int(11) NOT NULL,
+  `id_d` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `util_dep`
+--
+
+INSERT INTO `util_dep` (`id_u`, `id_d`) VALUES
+(2, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `volume_horaire`
 --
 
@@ -293,16 +340,23 @@ ALTER TABLE `annee`
   ADD UNIQUE KEY `id_a` (`id_a`);
 
 --
+-- Index pour la table `departement`
+--
+ALTER TABLE `departement`
+  ADD PRIMARY KEY (`id_d`);
+
+--
 -- Index pour la table `formation`
 --
 ALTER TABLE `formation`
-  ADD PRIMARY KEY (`id_for`);
+  ADD PRIMARY KEY (`id_f`),
+  ADD KEY `fk_formation_-_id_d` (`id_d`);
 
 --
 -- Index pour la table `for_annee`
 --
 ALTER TABLE `for_annee`
-  ADD PRIMARY KEY (`id_for`,`id_a`),
+  ADD PRIMARY KEY (`id_f`,`id_a`),
   ADD KEY `fk_for_annee_-_id_a` (`id_a`);
 
 --
@@ -344,8 +398,8 @@ ALTER TABLE `programme`
 -- Index pour la table `prog_for`
 --
 ALTER TABLE `prog_for`
-  ADD PRIMARY KEY (`id_prog`,`id_for`),
-  ADD KEY `fk_prog_for_-_id_for` (`id_for`);
+  ADD PRIMARY KEY (`id_prog`,`id_f`),
+  ADD KEY `fk_prog_for_-_id_f` (`id_f`);
 
 --
 -- Index pour la table `role`
@@ -371,6 +425,13 @@ ALTER TABLE `utilisateur`
   ADD KEY `fk_utilisateur_-_id_role` (`id_role`);
 
 --
+-- Index pour la table `util_dep`
+--
+ALTER TABLE `util_dep`
+  ADD PRIMARY KEY (`id_u`,`id_d`),
+  ADD KEY `fk_util_dep_-_id_d` (`id_d`);
+
+--
 -- Index pour la table `volume_horaire`
 --
 ALTER TABLE `volume_horaire`
@@ -387,10 +448,15 @@ ALTER TABLE `volume_horaire`
 ALTER TABLE `annee`
   MODIFY `id_a` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT pour la table `departement`
+--
+ALTER TABLE `departement`
+  MODIFY `id_d` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT pour la table `formation`
 --
 ALTER TABLE `formation`
-  MODIFY `id_for` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_f` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `module`
 --
@@ -425,12 +491,16 @@ ALTER TABLE `utilisateur`
 -- Contraintes pour les tables exportées
 --
 
+-- Contraintes pour la table `formation`
+ALTER TABLE `formation`
+  ADD CONSTRAINT `fk_formation_-_id_d` FOREIGN KEY (`id_d`) REFERENCES `departement` (`id_d`);
+
 --
 -- Contraintes pour la table `for_annee`
 --
 ALTER TABLE `for_annee`
   ADD CONSTRAINT `fk_for_annee_-_id_a` FOREIGN KEY (`id_a`) REFERENCES `annee` (`id_a`),
-  ADD CONSTRAINT `fk_for_annee_-_id_for` FOREIGN KEY (`id_for`) REFERENCES `formation` (`id_for`);
+  ADD CONSTRAINT `fk_for_annee_-_id_f` FOREIGN KEY (`id_f`) REFERENCES `formation` (`id_f`);
 
 --
 -- Contraintes pour la table `per_mod`
@@ -450,7 +520,7 @@ ALTER TABLE `per_sem`
 -- Contraintes pour la table `prog_for`
 --
 ALTER TABLE `prog_for`
-  ADD CONSTRAINT `fk_prog_for_-_id_for` FOREIGN KEY (`id_for`) REFERENCES `formation` (`id_for`),
+  ADD CONSTRAINT `fk_prog_for_-_id_f` FOREIGN KEY (`id_f`) REFERENCES `formation` (`id_f`),
   ADD CONSTRAINT `fk_prog_for_-_id_prog` FOREIGN KEY (`id_prog`) REFERENCES `programme` (`id_prog`);
 
 --
@@ -464,6 +534,13 @@ ALTER TABLE `semestre`
 --
 ALTER TABLE `utilisateur`
   ADD CONSTRAINT `fk_utilisateur_-_id_role` FOREIGN KEY (`id_role`) REFERENCES `role` (`id_r`);
+
+--
+-- Contraintes pour la table `util_dep`
+--
+ALTER TABLE `util_dep`
+  ADD CONSTRAINT `fk_util_dep_-_id_d` FOREIGN KEY (`id_d`) REFERENCES `departement` (`id_d`),
+  ADD CONSTRAINT `fk_util_dep_-_id_u` FOREIGN KEY (`id_u`) REFERENCES `utilisateur` (`id_u`);
 
 --
 -- Contraintes pour la table `volume_horaire`
