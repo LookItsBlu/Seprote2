@@ -25,22 +25,24 @@ $(document).ready(function () {
                 if (code == 1) {
                     //window.location.href = 'gestion_compte.php';
                     notifType = 'success';
+                    message.title = 'Compte créer !';
+                    message.body = 'Le compte a été créer avec succès !';
                     updateList();
                 } else if (code == 0) {
                     message.title = 'Champ(s) vide(s) !';
-                    message.body = 'Veuillez remplir tous les champs pour valider la création de ce compte.';
+                    message.body = 'Veuillez remplir tous les champs pour valider la création de ce compte .';
                 } else if (code == -1) {
                     message.title = 'Id du rôle incorrect !';
-                    message.body = "Veuillez sélectionner l'un des rôles présents dans la liste.";
+                    message.body = "Veuillez sélectionner l'un des rôles présents dans la liste .";
                 } else if (code == -2) {
                     message.title = 'Adresse mail incorrecte !';
                     message.body = 'Veuillez saisir une adresse e-mail conforme comme ci-contre : xx@xx.xx .';
                 } else if (code == -3) {
                     message.title = 'Mot de passe trop court !';
-                    message.body = 'Veuillez saisir un mot de passe comportant au moins 6 caractères.';
+                    message.body = 'Veuillez saisir un mot de passe comportant au moins 6 caractères .';
                 } else if (code == -4) {
                     message.title = 'Erreur du serveur !';
-                    message.body = 'Une erreur a eu lieu lors de la création de ce compte, veuillez réessayer ultérieurement.';
+                    message.body = 'Une erreur a eu lieu lors de la création de ce compte, veuillez réessayer ultérieurement .';
                 }
                 if (!$.isEmptyObject(message)) {
                     notif.sendNotification(notifType, message, 5000);

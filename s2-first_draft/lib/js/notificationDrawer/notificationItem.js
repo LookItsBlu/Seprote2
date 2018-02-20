@@ -25,7 +25,7 @@ class notificationItem {
         this.owner = owner;
 
         this.colorError = '#ff3014';
-        this.colorConfirm = '#7be016';
+        this.colorSuccess = '#7be016';
         this.colorWarning = '#f8db39';
         this.colorInfo = '#a2ffe4';
 
@@ -63,7 +63,7 @@ class notificationItem {
         this.style.insertRule(".notification-content { padding: 15px 0 0 15px; pointer-events: none; }", 0);
 
         this.style.insertRule(".notification-error { background-color: "+this.colorError+"; opacity: "+this.opacity+"; }", 0);
-        this.style.insertRule(".notification-confirm { background-color: "+this.colorConfirm+"; opacity: "+this.opacity+"; }", 0);
+        this.style.insertRule(".notification-success { background-color: "+this.colorSuccess+"; opacity: "+this.opacity+"; }", 0);
         this.style.insertRule(".notification-warning { background-color: "+this.colorWarning+"; opacity: "+this.opacity+"; }", 0);
         this.style.insertRule(".notification-info { background-color: "+this.colorInfo+"; opacity: "+this.opacity+"; }", 0);
 
