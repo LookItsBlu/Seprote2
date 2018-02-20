@@ -85,6 +85,10 @@
             }
         });
 
+        $('.cursor_drag').dblclick(function() {
+            $(this).next().width('75%');
+        });
+
         /*if ($('.zone').width() <= 50 px) {
             ui.draggable.draggable('option', 'revert', true);
         }*/
