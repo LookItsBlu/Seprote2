@@ -54,9 +54,9 @@ if($_SESSION['role'] < 2){
 				}
 			}*/
 
-			if($_POST['type_form'] == 2){
+			/*if($_POST['type_form'] == 2){
 
-				if(isset($_POST["id"]) && isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && isset($_POST["role"])){
+				/*if(isset($_POST["id"]) && isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["mail"]) && isset($_POST["role"])){
 
 					$req = $bdd->prepare('UPDATE utilisateur SET id_u = :id, nom = :nom, prenom = :prenom, mail = :mail, id_role = :role  WHERE id_u = :id');
 					$res = $req->execute(array(
@@ -70,14 +70,14 @@ if($_SESSION['role'] < 2){
 
 				}
 
-			}
+			}*/
 
-			if($_POST['type_form'] == 3){
+			/*if($_POST['type_form'] == 3){
                 if(isset($_POST["id"])){
                     $req_delete = $bdd->prepare("DELETE FROM utilisateur WHERE id_u = :id");
                     $req_delete->execute(array( "id" => intval($_POST["id"]) ));
 				}
-			}
+			}*/
 		}
 
 		include('includes/header.php');
@@ -105,8 +105,7 @@ if($_SESSION['role'] < 2){
                                             <input class="col-md-2" name="prenom" placeholder="Prénom" type="text">
                                             <input class="col-md-2" name="mail" placeholder="Adresse mail" type="text">
                                             <select class="col-md-2" name="id_role" type="text">
-                                                <option value="1">Administrateur</option>
-                                                <option value="2">Gestionaire</option>
+                                                <option value="2">Gestionnaire</option>
                                                 <option value="3" selected>Professeur</option>
                                             </select>
                                             <input class="col-md-2" type="password" name="mdp" placeholder="Mot de passe">
@@ -164,7 +163,7 @@ if($_SESSION['role'] < 2){
 
 						/***************** BOITE DIALOGUE EDITION *******************/?>
 
-                                            <div id="dialog_edit" title="Edition de compte">
+                        <!--                <div id="dialog_edit" title="Edition de compte">
                                                 <p class="validateTips">Tous les champs sont nécessaires.</p>
                                                 <form name="edit_compte" id="editCompte" method="POST" action="gestion_compte.php">
                                                     <label for="nom">Nom:</label>
@@ -179,7 +178,6 @@ if($_SESSION['role'] < 2){
                                                     <label for="role">Rôle:</label>
                                                     <select name="role">
                                                 <option value=""></option>
-                                                <option value="1">Administrateur</option>
                                                 <option value="2">Gestionnaire</option>
                                                 <option value="3">Professeur</option>
                                             </select>
@@ -189,7 +187,7 @@ if($_SESSION['role'] < 2){
                                                     <input type="hidden" name='type_form' value='2'>
                                                 </form>
 
-                                            </div>
+                                            </div>-->
 
                                     </tbody>
                                 </form>
@@ -244,7 +242,7 @@ if($_SESSION['role'] < 2){
     </div>
 
     <script>
-        $("#ListeComptes").tablesorter();
+/*      $("#ListeComptes").tablesorter();
         $("#dialog_edit").hide();
         $("input[name='edit']").click(function() {
 
@@ -271,20 +269,21 @@ if($_SESSION['role'] < 2){
                     }
                 }
             });
-        });
+        });*/
 
-        $("input[name='delete']").click(function() {
+        /*$("input[name='delete']").click(function() {
             if (confirm("Voulez-vous vraiment supprimer ce compte ?")) {
                 var idd = $(this)[0].id;
                 var y = idd.substring('6', idd.length);
                 $("#id").val(y);
                 $("#delete_users").submit();
             }
-        });
-
-    </script>
+        });*/
+</script>
     <script src="js/ajax/fetchCompte.js"></script>
     <script src="js/ajax/addCompte.js"></script>
+    <script src="js/ajax/updateCompte.js"></script>
+    <script src="js/ajax/deleteCompte.js"></script>
 
     <?php
 		}
