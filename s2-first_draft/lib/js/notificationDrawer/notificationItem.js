@@ -11,7 +11,7 @@
 /* );                                                                                                   */
 /*                                                                                                      */
 /* notif.sendNotification(                                                                              */
-/*   notification type ('error', 'confirm', 'info', 'warning'),                                         */
+/*   notification type ('error', 'success', 'info', 'warning'),                                         */
 /*   {                                                                                                  */
 /*     title: 'Notification Title',                                                                     */
 /*     body: 'Notification body'                                                                        */

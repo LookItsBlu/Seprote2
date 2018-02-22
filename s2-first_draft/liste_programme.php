@@ -1,6 +1,5 @@
 <?php
 	session_start();
-    //require_once "bdd/BDD.php";
 
 	if(empty($_SESSION['id'])){        // On n'est pas connecter
         header('location: login.php');
@@ -19,13 +18,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php for($i=9;$i>0;$i--){ ?>
-                    <tr>
-                        <td class="col_name">
-                            <?php echo "<a>201".$i."-201".($i-1)."</a>";?>
-                        </td>
-                    </tr>
-                    <?php } ?>
                 </tbody>
             </table>
         </div>
@@ -69,28 +61,6 @@
         </div>
     </div>
 </div>
-<script>
-    $('.cursor_drag').draggable({
-        axis: 'x',
-        containment: 'parent',
-        helper: 'clone',
-        start: function(event, ui) {
-            $(this).attr('start_offset', $(this).offset().left);
-            $(this).attr('start_next_width', $(this).next().width());
-        },
-        drag: function(event, ui) {
-            var prev_element = $(this).prev();
-            var next_element = $(this).next();
-            var x_difference = $(this).attr('start_offset') - ui.offset.left;
-            prev_element.width(ui.offset.left - prev_element.offset().left);
-            next_element.width(parseInt($(this).attr('start_next_width')) + x_difference);
-        }
-    });
-
-    $('.cursor_drag').dblclick(function() {
-        $(this).next().width('75%');
-    });
-</script>
 <script type='module' src='lib/js/listItem/TreeList.js'></script>
 <script type='module' src='js/liste_programme.js'></script>
 
