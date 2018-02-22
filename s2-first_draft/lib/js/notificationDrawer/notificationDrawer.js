@@ -11,7 +11,7 @@
 /* );                                                                                                   */
 /*                                                                                                      */
 /* notif.sendNotification(                                                                              */
-/*   notification type ('error', 'confirm', 'info', 'warning'),                                         */
+/*   notification type ('error', 'success', 'info', 'warning'),                                         */
 /*   {                                                                                                  */
 /*     title: 'Notification Title',                                                                     */
 /*     body: 'Notification body'                                                                        */
@@ -152,7 +152,7 @@ class notification {
         }
 
         //slide the new notification into view
-        window.requestAnimationFrame(function(){
+        setTimeout(function(){
             switch(p.drawerDirection) {
                 case 'topleft':
                 case 'bottomleft':
@@ -163,8 +163,9 @@ class notification {
                     notif.style.right = '15px';
                     break;
             }
-        });
+        }, 10);
     }
+
 
     //Regroup all the notifications together by moving the
     //ones after the newly deleted notification up or down

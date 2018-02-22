@@ -19,6 +19,17 @@ export default class ListItem {
     setClick() {
         var p = this;
 
+        document.querySelector('.'+p.class).addEventListener("click", ()=>{
+            window.dispatchEvent(new CustomEvent("TreeItem Click",
+                {
+                    detail: {
+                        item: { id: this.id, class: this.class },
+                        parent: this.parent
+                    }
+                }
+            ));
+        });
+
         document.querySelector('.'+p.class).addEventListener("dblclick", ()=>{
             p.parent.selectedId = p.id;     //l'id de l'élement selectioné est envoyer a l'objet de la liste
             p.parent.nextLevel();           // on avance dans l'arborescence
