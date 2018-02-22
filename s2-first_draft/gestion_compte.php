@@ -20,7 +20,7 @@ session_start();
 if(empty($_SESSION['id'])) {		// On n'est pas connecté
 	header('Location: login.php');
 }
-else if($_SESSION['role'] != 1) {	// On n'est pas connecté en tant qu'admin
+else if($_SESSION['role'] > 2) {	// On n'est pas connecté en tant qu'admin
 	header('Location: index.php');
 }
 ?>
@@ -42,7 +42,9 @@ include('includes/menu.php');
                                             <input class="col-md-2" name="prenom" placeholder="Prénom" type="text">
                                             <input class="col-md-2" name="mail" placeholder="Adresse mail" type="text">
                                             <select class="col-md-2" name="id_role" type="text">
+                                                <?php if($_SESSION['role'] == 1) { ?>
                                                 <option value="2">Gestionnaire</option>
+                                                <?php } ?>
                                                 <option value="3" selected>Professeur</option>
                                             </select>
                                             <input class="col-md-2" type="password" name="mdp" placeholder="Mot de passe">
@@ -50,14 +52,14 @@ include('includes/menu.php');
                                             $req_dptm = $bdd->prepare("SELECT id_d,nom_d from departement");
                                             $req_dptm->execute();
                                             ?>
-                                            <div class="form-check col-md-10">
-                                                <span>Département :</span>
-                                                <?php while($data =$req_dptm->fetch()){ ?>
-                                                <input type="checkbox" class="" id="dptm<?php echo $data['id_d'];?>">
-                                                <label class="" for="dptm<?php echo $data['id_d'];?>"><?php echo $data['nom_d'];?></label>
-                                                <?php } ?>
-                                            </div>
-                                            <button class="col-md-1" class="submitBtn" value="Créer" type="submit">Ajouter</button>
+                                                <div class="form-check col-md-10">
+                                                    <span>Département :</span>
+                                                    <?php while($data =$req_dptm->fetch()){ ?>
+                                                    <input type="checkbox" class="" id="dptm<?php echo $data['id_d'];?>">
+                                                    <label class="" for="dptm<?php echo $data['id_d'];?>"><?php echo $data['nom_d'];?></label>
+                                                    <?php } ?>
+                                                </div>
+                                                <button class="col-md-1" class="submitBtn" value="Créer" type="submit">Ajouter</button>
                                         </div>
                                     </div>
                                 </form>
