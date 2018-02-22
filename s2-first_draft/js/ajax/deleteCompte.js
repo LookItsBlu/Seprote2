@@ -13,6 +13,10 @@ $(document).ready(function () {
                 data: params,
                 success: function () {
                     updateList();
+                    notif.sendNotification('success', {
+                        title: 'Compte supprimé !',
+                        body: 'Le compte a été supprimé avec succès !'
+                    }, 5000);
                 }
             });
         }

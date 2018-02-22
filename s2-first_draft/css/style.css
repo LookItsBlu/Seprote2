@@ -421,8 +421,10 @@ footer .separator {
     display: inline-flex;
     border-radius: 5px;
     margin: 0 5px;
-    overflow: auto;
+    overflow-x: scroll;
+    overflow-y: auto;
     min-width: 10%;
+    height: 80%;
 }
 
 .zone_arbor {

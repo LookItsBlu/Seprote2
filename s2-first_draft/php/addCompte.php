@@ -1,5 +1,9 @@
 <?php
 require_once "../bdd/BDD.php";
+$req_identiq = $bdd->prepare('SELECT mail FROM utilisateur WHERE mail = :mail');
+$req_identiq->execute(array(
+    'mail' => $_POST['mail'],
+));
 
 if(empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['mail'])|| empty($_POST['mdp'])){
     echo 0;
@@ -19,6 +23,10 @@ else if(strlen($_POST['mdp']) < 6){
     echo -3;
     //$ERROR = "Mot de passe trop court !";
 }
+else if($req_identiq->fetch()){
+    echo -4;
+}
+
 
 /********** REQUETE A EFFECTUER **************/
 
@@ -33,7 +41,7 @@ else{
     //header('Location: gestion_compte.php');
 
     if(!$req_ajout){
-        echo -4;
+        echo -5;
     } else{
         echo 1;
     }
