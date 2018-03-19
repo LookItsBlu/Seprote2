@@ -1,20 +1,26 @@
 import TreeList from '../lib/js/listItem/TreeList.js';
-// AJOUTER <script type='module' src='lib/js/infoList/InfoList.js'></script>
-// DANS liste_programme.php ET DECOMMENTER CE CODE:
-//import InfoList from '../lib/js/infoList/InfoList.js';
+import InfoList from '../lib/js/infoList/InfoList.js';
 
 $(document).ready(()=>{
-    //Init list
+    //Init tree
     new TreeList($('#liste_program')[0]);
 
+    //Init list
+    var display_list = new InfoList($('#table_program')[0]);
 
-    // CODE D'EXAMPLE, CE CODE DOIT ETRE MIS DANS UN NOUVEAU FICHIER
-    function eventHandler(e) {
-      console.log('click! '+e.detail.item.id);
-    }
-    window.addEventListener("TreeList Click", eventHandler);
-    // CODE D'EXAMPLE, CE CODE DOIT ETRE MIS DANS UN NOUVEAU FICHIER
-
+    //Detect clicks on the tree items, and
+    window.addEventListener("TreeItem Click", (event)=>{
+        let evt = event.detail;
+        $.ajax({
+            method: 'post',
+            url: 'lib/js/infoList/php/infoList.gatherInfo.php',
+            data: { 'depth': evt.parent.depth, 'id': evt.item.id },
+            success: function(data){
+                if (data === 'end') return 0;
+                else display_list.updateItems(evt, JSON.parse(data));
+            }
+        });
+    });
 
     //Init Dragbar
     $('.cursor_drag').draggable({

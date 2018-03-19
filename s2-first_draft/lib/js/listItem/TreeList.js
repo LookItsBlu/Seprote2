@@ -64,7 +64,7 @@ export default class TreeList {
         $.ajax({
             method: 'post',
             url: 'lib/js/listItem/php/treeList.getItems.php',
-            data: "depth=..depth..&id=..id..".strcast({ 'depth': p.depth, 'id': p.selectedId }),
+            data: { 'depth': p.depth, 'id': p.selectedId },
             success: function(data){
                 p.received_data = JSON.parse(data);
                 if(p.received_data.length>0) {
@@ -100,7 +100,7 @@ export default class TreeList {
                 value_to_display = value_to_display[p.displayed_value[ p.depth ]];
             }
 
-            p.items.push( new ListItem(p, value_to_display, p.received_data[i][0]) );
+            p.items.push( new ListItem(p, value_to_display, p.received_data[i][0], p.history) );
 
             i++;
         } while(i<p.received_data.length);

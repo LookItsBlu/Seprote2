@@ -1,32 +1,25 @@
 <?php
-
-/*
-$_POST contient deux valeurs:
-    depth: la profondeur dans l'arborescence, permet de savoir quel table utiliser
-    id: l'id de l'item sélectioné dans la liste
-*/
-
-
 include ('../../../../bdd/BDD.php');
 
-//nom des tables
 $level = array(
-    "annee",
+    //"annee",
     "formation",
     "semestre",
     "periode",
-    "module"
+    "module",
+    ""
 );
 
 $res = '';
 
 switch($level[$_POST['depth']]){
-    case 'annee':
+    /*case 'annee':
         $sql = 'SELECT * FROM annee';
         $pdoreq = $bdd->prepare($sql);
         $pdoreq->execute();
         $res = $pdoreq->fetchall();
         break;
+    */
     case 'formation':
         $sql = 'SELECT * FROM formation INNER JOIN for_annee ON formation.id_f = for_annee.id_f WHERE id_a = :id';
         $pdoreq = $bdd->prepare($sql);
@@ -55,4 +48,5 @@ switch($level[$_POST['depth']]){
         break;
 }
 
-echo json_encode($res);
+if (empty($res)) echo('end');
+else echo(json_encode($res));

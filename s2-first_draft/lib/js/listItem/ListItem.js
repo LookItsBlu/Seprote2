@@ -1,8 +1,11 @@
 export default class ListItem {
-    constructor(parent, displayed_value, id) {
+    constructor(parent, displayed_value, id, history) {
         this.parent = parent;                               //la liste a laquelle chaque item appartient
         this.id = parseInt(id);                             //l'id de chaque item dans la bdd
         this.display = displayed_value;                     //la valeur affiché
+        this.breadcrum = history.slice();         //chemin d'id menant vers cette liste
+        this.breadcrum.push(this.id);
+        this.breadcrum.shift();
         this.class = 'item-..value..'.strcast({
             "value": Math.random().toString(36).slice(2)    //chaque item de la liste a une classe géneré aléatoirement
         });
@@ -23,8 +26,9 @@ export default class ListItem {
             window.dispatchEvent(new CustomEvent("TreeItem Click",
                 {
                     detail: {
-                        item: { id: this.id, class: this.class },
-                        parent: this.parent
+                        item: { id: this.id, class: this.class, display: this.display },
+                        parent: { html: this.parent.base, depth: this.parent.depth },
+                        breadcrum: this.breadcrum
                     }
                 }
             ));
@@ -34,17 +38,5 @@ export default class ListItem {
             p.parent.selectedId = p.id;     //l'id de l'élement selectioné est envoyer a l'objet de la liste
             p.parent.nextLevel();           // on avance dans l'arborescence
         });
-    }
-
-    rename() {
-        //TODO
-    }
-
-    duplicate() {
-        //TODO
-    }
-
-    delete() {
-        //TODO
     }
 }
