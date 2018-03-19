@@ -3,7 +3,9 @@ export default class infoListItem {
         this.parent = parent;                               //la liste a laquelle chaque item appartient
         this.id = parseInt(id);                             //l'id de chaque item dans la bdd
         this.display = displayed_value;                     //la valeur affiché
-        this.breadcrum = breadcrum;                         //chemin d'id menant vers cette liste
+        this.breadcrum = parent.event.breadcrum;            //chemin d'id menant vers cette liste
+        this.buttons = '';
+        this.editing = false;
         this.class = 'infoListItem-..value..'.strcast({
             "value": Math.random().toString(36).slice(2)    //chaque item de la liste a une classe géneré aléatoirement
         });
@@ -12,7 +14,7 @@ export default class infoListItem {
     //créer le code html de l'item
     displayItem() {
         if(this.parent.role < 3) {
-            this.display += `
+            this.buttons = `
             <td class="icon_group">
                 <img class="editIcon icon_renom" src="src/pencil.png" alt="Renommer" title="Renommer cette ligne" />
             </td>
@@ -25,25 +27,36 @@ export default class infoListItem {
             `;
         }
 
-        return "<tr class='..class..'>..item..</tr>".strcast({
+        let display_html = '';
+        for(let i in this.display)
+            if(this.editing)
+                display_html += "<td><input type='text' value='"+this.display[i]+"'></td>";
+            else
+                display_html += '<td>'+this.display[i]+'</td>';
+
+        return "<tr class='..class..'>..item.. ..buttons..</tr>".strcast({
             "class": this.class,
-            "item": this.display
+            "item": display_html,
+            "buttons": this.buttons
         });
     }
 
     setClick() {
-        var p = this;
-
-        document.querySelector('.'+p.class+' .icon_renom').addEventListener("click", ()=>{
+        document.querySelector('.'+this.class+' .icon_renom').addEventListener("click", ()=>{
             this.editItem();
         });
     }
 
     editItem(evt) {
-        console.log('requested edit for '+this.class);
+        let itemDOM = document.querySelector('.'+this.class);
+        if(this.editing) {
+            for(let i in this.display) {
+                this.display[i] = Array.from(itemDOM.getElementsByTagName('input'))[i].value;
+                // ajax modification dans la bdd ici
+            }
+        }
 
-        window.dispatchEvent(new CustomEvent("infoList Edit",
-            { detail: { class: this.class } }
-        ));
+        this.editing = !this.editing;
+        window.dispatchEvent(new CustomEvent("infoList Update"));
     }
 }
