@@ -477,6 +477,31 @@ img.editIcon {
     width: 25px;
 }
 
-img.editIcon:hover {
+/*img.editIcon:hover {
     opacity: 0.5;
+}*/
+
+.table .treelist-history-back td {
+    padding: 10px .75rem 5px;
+    font-weight: bold;
+    display: table-cell;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+.table .treelist-history-back img {
+    width: 18px;
+    margin-bottom: 6px;
+    margin-right: 6px;
+}
+
+.table td.col_name {
+    user-select: none;
+    cursor: pointer;
+}
+
+.table td.col_name:hover,
+.table .treelist-history-back td:hover,
+.sep_table .icon_group:hover {
+    background-color: rgba(200, 200, 200, 1);
 }
