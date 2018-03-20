@@ -9,10 +9,10 @@ export default class InfoList {
             "Formation",
             ["Debut de semestre", "Fin de semestre"],
             ["Debut de période", "Fin de période"],
-            "Module"
+            ["Module", "Code"]
         ];
         this.displayed_value = [
-            1, [1, 2], [1, 2], 1
+            1, [1, 2], [1, 2], [1, 2]
         ];
 
         this.event = {};
@@ -41,17 +41,28 @@ export default class InfoList {
     createItems(obj) {
         obj.items = new Array();
 
+        let display = [];
+        let data_cells = obj.displayed_value[obj.event.parent.depth];
         obj.fetched.forEach(elem => {
-            let display = [];
-            let value_to_display = obj.displayed_value[obj.event.parent.depth];
-            if(value_to_display.constructor === Array)
-                for(let value of value_to_display)
+            display = [];
+            if(data_cells.constructor === Array)
+                for(let value of data_cells)
                     display.push(elem[value])
             else
-                display.push(elem[value_to_display])
+                display.push(elem[data_cells])
 
             obj.items.push(new infoListItem(obj, display, elem[0]));
         });
+
+        //ajoute un button pour ajouter une nouvelle valeur
+        display = [];
+        if(data_cells.constructor === Array)
+            for(let value of data_cells) display.push('')
+        else display.push('')
+
+        let add_button = new infoListItem(obj, display, -1);
+        add_button.makeAddButton();
+        obj.items.push(add_button);
 
         obj.createTable(obj);
     }
@@ -90,25 +101,10 @@ export default class InfoList {
         if (obj.role < 3) tableHTML += "<th></th><th></th><th></th>"
 
         tableHTML += "</thead><tbody>";
-
-        obj.items.forEach(item => {
-            tableHTML += item.displayItem();
-        });
+        obj.items.forEach(item => { tableHTML += item.displayItem(); });
         tableHTML += "</tbody>";
-        obj.base.innerHTML = tableHTML;
 
-        //ajoute un button pour ajouter une nouvelle valeur
-        var addBtn = document.createElement("tr"),
-            addBtnCell = document.createElement("td"),
-            addImg = document.createElement("img"),
-            addTxt = document.createTextNode("Ajouter");
-        addImg.src = "src/red-plus-add.png";
-        addBtn.appendChild(addBtnCell);
-        addBtnCell.appendChild(addImg);
-        addBtnCell.appendChild(addTxt);
-        addBtnCell.setAttribute("colspan", "10");
-        addBtn.className = 'list-item-add';
-        obj.base.children[1].appendChild(addBtn);
+        obj.base.innerHTML = tableHTML;
 
         // set clicks
         obj.items.forEach(item => {

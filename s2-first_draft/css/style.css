@@ -495,8 +495,11 @@ img.editIcon {
     margin-right: 6px;
 }
 
-.table td.col_name {
+#liste_program tr {
     user-select: none;
+    cursor: pointer;
+}
+.icon_group {
     cursor: pointer;
 }
 

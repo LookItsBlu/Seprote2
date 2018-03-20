@@ -4,13 +4,10 @@ $(document).ready(function () {
             var idd = $(this)[0].id;
             var y = idd.substring('6', idd.length);
 
-            var params = 'idD=' + y;
-            //$("#delete_users").submit();
-
             $.ajax({
                 type: 'POST',
                 url: 'php/deleteCompte.php',
-                data: params,
+                data: { idD: y },
                 success: function () {
                     updateList();
                     notif.sendNotification('success', {

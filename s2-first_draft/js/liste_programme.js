@@ -8,7 +8,7 @@ $(document).ready(()=>{
     //Init list
     var display_list = new InfoList($('#table_program')[0]);
 
-    //Detect clicks on the tree items, and
+    //Detect clicks on the tree items, and update right list with new data
     window.addEventListener("TreeItem Click", (event)=>{
         let evt = event.detail;
         $.ajax({
