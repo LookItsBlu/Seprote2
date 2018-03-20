@@ -1,5 +1,5 @@
-import TreeList from '../lib/js/listItem/TreeList.js';
-import InfoList from '../lib/js/infoList/InfoList.js';
+import TreeList from '../lib/listItem/TreeList.js';
+import InfoList from '../lib/infoList/InfoList.js';
 
 $(document).ready(()=>{
     //Init tree
@@ -13,7 +13,7 @@ $(document).ready(()=>{
         let evt = event.detail;
         $.ajax({
             method: 'post',
-            url: 'lib/js/infoList/php/infoList.gatherInfo.php',
+            url: 'lib/infoList/php/infoList.gatherInfo.php',
             data: { 'depth': evt.parent.depth, 'id': evt.item.id },
             success: function(data){
                 if (data === 'end') return 0;
@@ -23,6 +23,7 @@ $(document).ready(()=>{
     });
 
     //Init Dragbar
+    /*
     $('.cursor_drag').draggable({
         axis: 'x',
         containment: 'parent',
@@ -42,4 +43,5 @@ $(document).ready(()=>{
     $('.cursor_drag').dblclick(function() {
         $(this).next().width('75%');
     });
+    */
 })

@@ -38,7 +38,6 @@ else{
         'id_role' => $_POST['id_role'],
         'mdp' => sha1($_POST['mdp'])
     ));
-    //header('Location: gestion_compte.php');
 
     if(!$req_ajout){
         echo -5;

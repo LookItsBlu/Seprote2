@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    $("#ListeComptes").tablesorter();
     $('#ListeComptes').on('click', "input[name='edit']", function () {
 
         console.log($('#name'));
