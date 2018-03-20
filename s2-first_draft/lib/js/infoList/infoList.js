@@ -89,6 +89,7 @@ export default class InfoList {
         if(obj.role < 3) tableHTML += "<th></th><th></th><th></th>"
 
         tableHTML += "</thead><tbody>";
+
         obj.items.forEach(item => {
             tableHTML += item.displayItem();
         });
