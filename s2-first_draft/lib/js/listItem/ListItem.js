@@ -3,9 +3,12 @@ export default class ListItem {
         this.parent = parent;                               //la liste a laquelle chaque item appartient
         this.id = parseInt(id);                             //l'id de chaque item dans la bdd
         this.display = displayed_value;                     //la valeur affiché
+        this.isActive = false;
+
         this.breadcrum = history.slice();         //chemin d'id menant vers cette liste
         this.breadcrum.push(this.id);
         this.breadcrum.shift();
+
         this.class = 'item-..value..'.strcast({
             "value": Math.random().toString(36).slice(2)    //chaque item de la liste a une classe géneré aléatoirement
         });
@@ -17,6 +20,17 @@ export default class ListItem {
             "class": this.class,
             "name": this.display
         });
+    }
+
+    makeActive(isActive) {
+        let itemSelect = document.querySelector('.'+this.class);
+        if (isActive) {
+            itemSelect.classList.add('treelist-item-active');
+            this.isActive = true;
+        } else {
+            itemSelect.classList.remove('treelist-item-active');
+            this.isActive = false;
+        }
     }
 
     setClick() {

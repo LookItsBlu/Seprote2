@@ -29,6 +29,8 @@ export default class TreeList {
         p.received_data = [];
 
         p.nextLevel();
+
+        p.eventListener();
     }
 
     nextLevel() {
@@ -151,5 +153,20 @@ export default class TreeList {
                 p.previousLevel();
             });
         }
+    }
+
+    addActiveClass(itemClass) {
+        this.items.forEach(elem => {
+            if (elem.class == itemClass)
+                elem.makeActive(true);
+            else if (elem.isActive && elem.class.indexOf(itemClass)<0)
+                elem.makeActive(false);
+        });
+    }
+
+    eventListener() {
+        window.addEventListener('TreeItem Click', event => {
+            this.addActiveClass(event.detail.item.class);
+        });
     }
 }
