@@ -1,19 +1,33 @@
 export default class infoListItem {
-    constructor(parent, displayed_value, id, breadcrum) {
+    constructor(parent, displayed_value, id) {
         this.parent = parent;                               //la liste a laquelle chaque item appartient
         this.id = parseInt(id);                             //l'id de chaque item dans la bdd
         this.display = displayed_value;                     //la valeur affiché
         this.breadcrum = parent.event.breadcrum;            //chemin d'id menant vers cette liste
         this.buttons = '';
         this.editing = false;
+        this.isAddButton = false;
         this.class = 'infoListItem-..value..'.strcast({
             "value": Math.random().toString(36).slice(2)    //chaque item de la liste a une classe géneré aléatoirement
         });
     }
 
+    makeAddButton() {
+        this.editing = true;
+        this.isAddButton = true;
+    }
+
     //créer le code html de l'item
     displayItem() {
-        if(this.parent.role < 3) {
+        if(this.isAddButton) {
+            this.buttons = `
+            <td class="icon_group list-item-add" colspan=10>
+                <img class="editIcon icon_add" src="src/red-plus-add.png" alt="Ajouter" title="Ajouter une ligne" />
+                Ajouter
+            </td>
+            `;
+        }
+        else if(this.parent.role < 3) {
             this.buttons = `
             <td class="icon_group rename_item">
                 <img class="editIcon icon_renom" src="src/pencil.png" alt="Renommer" title="Renommer cette ligne" />
@@ -42,15 +56,19 @@ export default class infoListItem {
     }
 
     setClick() {
-        document.querySelector('.'+this.class+' .rename_item').addEventListener("click", ()=>{
-            this.editItem();
-        });
-        document.querySelector('.'+this.class+' .delete_item').addEventListener("click", ()=>{
-            this.deleteItem();
-        });
-        /*document.querySelector('.list-item-add').addEventListener("click", ()=>{
-            this.addItem();
-        });*/
+        if(this.isAddButton) {
+            document.querySelector('.list-item-add').addEventListener("click", ()=>{
+                this.addItem();
+            });
+        }
+        else if(this.parent.role < 3) {
+            document.querySelector('.'+this.class+' .rename_item').addEventListener("click", ()=>{
+                this.editItem();
+            });
+            document.querySelector('.'+this.class+' .delete_item').addEventListener("click", ()=>{
+                this.deleteItem();
+            });
+        }
     }
 
     editItem() {
@@ -83,9 +101,6 @@ export default class infoListItem {
             data: {
                 'breadcrum': this.breadcrum,
                 'id': this.id
-            },
-            success(data) {
-                console.log(JSON.parse(data));
             }
         });
 
@@ -100,6 +115,18 @@ export default class infoListItem {
     }
 
     addItem() {
-        console.log('adding item...');
+        let itemDOM = document.querySelector('.'+this.class);
+        for(let i in this.display) {
+            this.display[i] = Array.from(itemDOM.getElementsByTagName('input'))[i].value;
+        }
+
+        $.ajax({
+            method: 'post',
+            url: 'lib/js/infoList/php/infoList.addItem.php',
+            data: {
+                'breadcrum': this.breadcrum,
+                'new_values': this.display
+            }
+        });
     }
 }

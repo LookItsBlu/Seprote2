@@ -505,9 +505,12 @@ img.editIcon {
 
 .table td.col_name,
 .table .treelist-history-back td,
-.sep_table .list-item-add td,
-.sep_table .icon_group {
+.sep_table .list-item-add td {
     user-select: none;
+    cursor: pointer;
+}
+
+.icon_group {
     cursor: pointer;
 }
 
