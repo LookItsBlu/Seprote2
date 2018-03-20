@@ -8,7 +8,7 @@ $(document).ready(function () {
             mail: e.target.mail.value,
             idRole: e.target.id_role.value,
             mdp: e.target.mdp.value
-        };
+        });
 
         $.ajax({
             type: 'POST',

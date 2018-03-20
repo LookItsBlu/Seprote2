@@ -44,10 +44,8 @@ export default class InfoList {
             if(value_to_display.constructor === Array)
                 for(let value of value_to_display)
                     display.push(elem[value])
-                    //display += '<td>'+elem[value]+'</td>';
             else
                 display.push(elem[value_to_display])
-                //display += '<td>'+elem[value_to_display]+'</td>';
 
             obj.items.push(new infoListItem(obj, display, elem[0]));
         });
@@ -105,6 +103,13 @@ export default class InfoList {
 
     checkForEvents(obj) {
         window.addEventListener("infoList Update", (event)=>{
+            obj.updateList(obj);
+        });
+
+        window.addEventListener("infoList Delete", (event)=>{
+            obj.items = obj.items.filter(obj => {
+                return obj.id !== event.detail.id && obj.class !== event.detail.class;
+            });
             obj.updateList(obj);
         });
     }
