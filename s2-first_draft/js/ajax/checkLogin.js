@@ -2,15 +2,10 @@ $(document).ready(function(){
     $('#loginForm').on('submit', function(e){
         e.preventDefault();
 
-        var params = 'login=..login..&mdp=..mdp..'.strcast({
-            login: e.target.login.value,
-            mdp: e.target.mdp.value
-        });
-
         $.ajax({
             type: 'POST',
             url: 'php/checkLogin.php',
-            data: params,
+            data: { login: e.target.login.value, mdp: e.target.mdp.value },
             success: function(code) {
                 var message = {};
 
