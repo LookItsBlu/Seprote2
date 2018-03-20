@@ -505,3 +505,22 @@ img.editIcon {
 .sep_table .icon_group:hover {
     background-color: rgba(200, 200, 200, 1);
 }
+
+.table .treelist-item-active {
+    background-color: rgba(200, 200, 200, 1);
+}
+
+.list-item-add {
+    color: #ee3228;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.list-item-add:hover {
+    background-color: rgba(255, 0, 0, 0.25)!important;
+}
+
+.list-item-add img {
+    margin-bottom: 3px;
+    margin-right: 5px;
+}

@@ -7,8 +7,8 @@ export default class InfoList {
         this.niveaux = [
             //"Année",
             "Formation",
-            [ "Debut de semestre", "Fin de semestre" ],
-            [ "Debut de période", "Fin de période" ],
+            ["Debut de semestre", "Fin de semestre"],
+            ["Debut de période", "Fin de période"],
             "Module"
         ];
         this.displayed_value = [
@@ -31,7 +31,10 @@ export default class InfoList {
     getRole(obj, callback) {
         $.ajax({
             url: 'lib/js/infoList/php/infoList.getRole.php',
-            success: function(data){ obj.role = data; callback(obj); }
+            success: function (data) {
+                obj.role = data;
+                callback(obj);
+            }
         });
     }
 
@@ -41,8 +44,8 @@ export default class InfoList {
         obj.fetched.forEach(elem => {
             let display = '';
             let value_to_display = obj.displayed_value[obj.event.parent.depth];
-            if(value_to_display.constructor === Array) {
-                for(let value of value_to_display) {
+            if (value_to_display.constructor === Array) {
+                for (let value of value_to_display) {
                     display += "<td>..value..</td>".strcast({
                         "value": elem[value]
                     });
@@ -63,12 +66,12 @@ export default class InfoList {
         let tableHTML = '<thead>';
 
         let value_names = obj.niveaux[obj.event.parent.depth];
-        if(value_names.constructor === Array)
-            for(let value_name of value_names)
-                tableHTML += '<th>'+value_name+'</th>';
-        else tableHTML = '<th>'+value_names+'</th>';
+        if (value_names.constructor === Array)
+            for (let value_name of value_names)
+                tableHTML += '<th>' + value_name + '</th>';
+        else tableHTML = '<th>' + value_names + '</th>';
 
-        if(obj.role < 3) tableHTML += "<th></th><th></th><th></th>"
+        if (obj.role < 3) tableHTML += "<th></th><th></th><th></th>"
 
         tableHTML += "</thead><tbody>";
         obj.items.forEach(item => {
@@ -77,20 +80,35 @@ export default class InfoList {
         tableHTML += "</tbody>";
         obj.base.innerHTML = tableHTML;
 
+        //ajoute un button pour ajouter une nouvelle valeur
+        var addBtn = document.createElement("tr"),
+            addBtnCell = document.createElement("td"),
+            addImg = document.createElement("img"),
+            addTxt = document.createTextNode("Ajouter");
+        addImg.src = "src/red-plus-add.png";
+        addBtn.appendChild(addBtnCell);
+        addBtnCell.appendChild(addImg);
+        addBtnCell.appendChild(addTxt);
+        addBtnCell.setAttribute("colspan", "10");
+        addBtn.className = 'list-item-add';
+        obj.base.children[1].appendChild(addBtn);
+
         // set clicks
-        obj.items.forEach(item => { item.setClick(); });
+        obj.items.forEach(item => {
+            item.setClick();
+        });
 
         // look for events
         obj.checkForEvents();
     }
 
     checkForEvents() {
-        window.addEventListener("infoList Edit", (event)=>{
+        window.addEventListener("infoList Edit", (event) => {
             event.stopPropagation();
-            let tds = [].slice.call($('.'+event.detail.class+' td'));
+            let tds = [].slice.call($('.' + event.detail.class + ' td'));
 
             tds = tds.slice(0, -3);
-            for(let td in tds) {
+            for (let td in tds) {
                 tds[td].innerHTML = "<input type='text' value='..oldval..'>".strcast({
                     "oldval": tds[td].innerHTML
                 });
