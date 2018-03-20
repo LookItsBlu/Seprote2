@@ -4,9 +4,6 @@
 	require_once "bdd/BDD.php";
 
 	if(isset($_POST['id_d'])) {
-		$selectProg = "<span class=\"selectProgText\">Choix du programme: </span>";
-        $selectProg .= "<select class=\"selectProg\">";
-        $selectProg .= "<option style=\"display:none\"></option>";
 		$req_prog = $bdd->prepare("SELECT p.id_prog, p.prog_nom
 								FROM programme p, prog_for pf, formation f, departement d
 								WHERE p.id_prog=pf.id_prog
@@ -16,10 +13,8 @@
 		$req_prog->bindValue(':id', $_POST['id_d']);
 		$req_prog->execute();
 		while($donnees = $req_prog->fetch()) {
-			$selectProg .= "<option value='".$donnees["id_prog"]."'>".$donnees["prog_nom"]."</option>";
+			echo "<option value='".$donnees["id_prog"]."'>".$donnees["prog_nom"]."</option>";
 		}
-        $selectProg .= "</select>";
-		echo $selectProg;
 	}
 	else {
 		include('includes/header.php');
@@ -49,7 +44,13 @@
             ?>
         </select>
         <br>
-        <div id="hidden"></div>
+        <div id="hidden">
+			<span class="selectProgText">Choix du programme: </span>
+			<select class="selectProg">
+				<option style="display:none"></option>
+
+			</select>
+		</div>
 
         <div id="content">
             <div id="left">
@@ -83,7 +84,7 @@
 				data: params,
 				success: function(data) {
 					$("#hidden").show();
-					$("#hidden").html(data);
+					$(".selectProg").append(data);
 				}
 			});
 			return false;

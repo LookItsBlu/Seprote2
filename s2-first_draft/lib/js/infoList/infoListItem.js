@@ -19,26 +19,28 @@ export default class infoListItem {
 
     //créer le code html de l'item
     displayItem() {
-        if(this.isAddButton) {
-            this.buttons = `
-            <td class="icon_group list-item-add" colspan=10>
-                <img class="editIcon icon_add" src="src/red-plus-add.png" alt="Ajouter" title="Ajouter une ligne" />
-                Ajouter
-            </td>
-            `;
-        }
-        else if(this.parent.role < 3) {
-            this.buttons = `
-            <td class="icon_group rename_item">
-                <img class="editIcon icon_renom" src="src/pencil.png" alt="Renommer" title="Renommer cette ligne" />
-            </td>
-            <td class="icon_group duplicate_item">
-                <img class="editIcon icon_dupli" src="src/copy.png" alt="Dupliquer" title="Dupliquer cette ligne" />
-            </td>
-            <td class="icon_group delete_item">
-                <img class="editIcon icon_suppr" src="src/trash.png" alt="Supprimer" title="Supprimer cette ligne" />
-            </td>
-            `;
+        if(this.parent.role < 3) {
+            if(this.isAddButton) {
+                this.buttons = `
+                <td class="icon_group list-item-add" colspan=10>
+                    <img class="editIcon icon_add" src="src/red-plus-add.png" alt="Ajouter" title="Ajouter une ligne" />
+                    Ajouter
+                </td>
+                `;
+            }
+            else {
+                this.buttons = `
+                <td class="icon_group rename_item">
+                    <img class="editIcon icon_renom" src="src/pencil.png" alt="Renommer" title="Renommer cette ligne" />
+                </td>
+                <td class="icon_group duplicate_item">
+                    <img class="editIcon icon_dupli" src="src/copy.png" alt="Dupliquer" title="Dupliquer cette ligne" />
+                </td>
+                <td class="icon_group delete_item">
+                    <img class="editIcon icon_suppr" src="src/trash.png" alt="Supprimer" title="Supprimer cette ligne" />
+                </td>
+                `;
+            }
         }
 
         let display_html = '';
