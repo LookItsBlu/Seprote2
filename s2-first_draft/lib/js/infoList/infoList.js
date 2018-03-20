@@ -55,14 +55,16 @@ export default class InfoList {
         });
 
         //ajoute un button pour ajouter une nouvelle valeur
-        display = [];
-        if(data_cells.constructor === Array)
-            for(let value of data_cells) display.push('')
-        else display.push('')
+        if(obj.role < 3) {
+            display = [];
+            if(data_cells.constructor === Array)
+                for(let value of data_cells) display.push('')
+            else display.push('')
 
-        let add_button = new infoListItem(obj, display, -1);
-        add_button.makeAddButton();
-        obj.items.push(add_button);
+            let add_button = new infoListItem(obj, display, -1);
+            add_button.makeAddButton();
+            obj.items.push(add_button);
+        }
 
         obj.createTable(obj);
     }
