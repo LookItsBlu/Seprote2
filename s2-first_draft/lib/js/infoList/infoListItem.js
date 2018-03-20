@@ -48,17 +48,19 @@ export default class infoListItem {
         document.querySelector('.'+this.class+' .delete_item').addEventListener("click", ()=>{
             this.deleteItem();
         });
-        document.querySelector('.list-item-add').addEventListener("click", ()=>{
+        /*document.querySelector('.list-item-add').addEventListener("click", ()=>{
             this.addItem();
-        });
+        });*/
     }
 
     editItem() {
         let itemDOM = document.querySelector('.'+this.class);
         if(this.editing) {
+            // update visible item
             for(let i in this.display) {
                 this.display[i] = Array.from(itemDOM.getElementsByTagName('input'))[i].value;
             }
+            // ...and send the update to the database
             $.ajax({
                 method: 'post',
                 url: 'lib/js/infoList/php/infoList.editItem.php',
@@ -75,7 +77,6 @@ export default class infoListItem {
     }
 
     deleteItem() {
-        //console.log(this.breadcrum, this.id);
         $.ajax({
             method: 'post',
             url: 'lib/js/infoList/php/infoList.deleteItem.php',
@@ -88,7 +89,14 @@ export default class infoListItem {
             }
         });
 
-        window.dispatchEvent(new CustomEvent("infoList Update"));
+        window.dispatchEvent(new CustomEvent("infoList Delete",
+            {
+                detail: {
+                    id: this.id,
+                    class: this.class
+                }
+            }
+        ));
     }
 
     addItem() {

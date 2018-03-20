@@ -1,29 +1,55 @@
 <?php
 	session_start();
 
-    require_once "bdd/BDD.php";
+	require_once "bdd/BDD.php";
 
-	include('includes/header.php');
+	if(isset($_POST['id_d'])) {
+		$selectProg = "<span class=\"selectProgText\">Choix du programme: </span>";
+        $selectProg .= "<select class=\"selectProg\">";
+        $selectProg .= "<option style=\"display:none\"></option>";
+		$req_prog = $bdd->prepare("SELECT p.id_prog, p.prog_nom
+								FROM programme p, prog_for pf, formation f, departement d
+								WHERE p.id_prog=pf.id_prog
+								AND pf.id_f=f.id_f
+								AND f.id_d=d.id_d
+								AND d.id_d=:id");
+		$req_prog->bindValue(':id', $_POST['id_d']);
+		$req_prog->execute();
+		while($donnees = $req_prog->fetch()) {
+			$selectProg .= "<option value='".$donnees["id_prog"]."'>".$donnees["prog_nom"]."</option>";
+		}
+        $selectProg .= "</select>";
+		echo $selectProg;
+	}
+	else {
+		include('includes/header.php');
 
-	if(!empty($_SESSION['id'])){ // On est connecter
-	   include('includes/menu.php');
+		if(!empty($_SESSION['id'])) { // On est connecté
+		   include('includes/menu.php');
 ?>
 
 <div id="main">
     <div class="mainWrap">
         <h1 class="bonjour">Bonjour, <?= htmlspecialchars($_SESSION['nom']). " " . htmlspecialchars($_SESSION['prenom']) ?>.</h1>
-
-        <br>
-        <span class="selectProgText">choix du programme: </span>
-        <select class="selectProg">
-            <option>   </option>
+		<br>
+		<span class="selectDepText">Choix du département: </span>
+        <select class="selectDep">
+            <option style="display:none"></option>
             <?php
-                $req_prog = $bdd->query("SELECT * FROM programme");
-                while($donnees = $req_prog->fetch()){
-                    echo "<option value='". $donnees["id_prog"] ."'>". $donnees["prog_nom"] ."</option>";
+                $req_dep = $bdd->prepare("SELECT d.id_d, d.nom_d
+										FROM departement d, utilisateur u, util_dep ud
+										WHERE u.id_u=ud.id_u
+										AND ud.id_d=d.id_d
+										AND u.id_u=:id");
+				$req_dep->bindValue(':id', $_SESSION['id']);
+				$req_dep->execute();
+                while($donnees = $req_dep->fetch()){
+                    echo "<option value='".$donnees["id_d"]."'>".$donnees["nom_d"]."</option>";
                 }
             ?>
         </select>
+        <br>
+        <div id="hidden"></div>
 
         <div id="content">
             <div id="left">
@@ -46,10 +72,29 @@
 </div>
 
 <script src="js/googlechart.js"></script>
+<script>
+	$(document).ready(function() {
+		$("#hidden").hide();
+		$(".selectDep").change(function() {
+			params = "id_d="+$(this).val();
+			$.ajax({
+				url: 'index.php',
+				type: 'POST',
+				data: params,
+				success: function(data) {
+					$("#hidden").show();
+					$("#hidden").html(data);
+				}
+			});
+			return false;
+		});
+	});
+</script>
 
 <?php
-    } else { header('Location: login.php'); }
+		}
+		else { header('Location: login.php'); }
 
-
-	include('includes/footer.php');
+		include('includes/footer.php');
+	}
 ?>
