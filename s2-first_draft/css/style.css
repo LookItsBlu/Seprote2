@@ -287,6 +287,14 @@ table#ListeComptes {
     display: none;
 }
 
+.form-check {
+    padding-top: 10px;
+}
+
+.form-check label {
+    margin: 0;
+}
+
 /* GestionHeure */
 
 .formHour button {
@@ -495,7 +503,10 @@ img.editIcon {
     margin-right: 6px;
 }
 
-.table td.col_name {
+.table td.col_name,
+.table .treelist-history-back td,
+.sep_table .list-item-add td,
+.sep_table .icon_group {
     user-select: none;
     cursor: pointer;
 }

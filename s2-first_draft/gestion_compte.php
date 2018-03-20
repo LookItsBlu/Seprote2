@@ -52,14 +52,14 @@ include('includes/menu.php');
                                             $req_dptm = $bdd->prepare("SELECT id_d,nom_d from departement");
                                             $req_dptm->execute();
                                             ?>
-                                                <div class="form-check col-md-10">
+                                                <button class="col-md-1" class="submitBtn" value="Créer" type="submit">Ajouter</button>
+                                                <div class="form-check col-md-12">
                                                     <span>Département :</span>
                                                     <?php while($data =$req_dptm->fetch()){ ?>
                                                     <input type="checkbox" class="" id="dptm<?php echo $data['id_d'];?>">
                                                     <label class="" for="dptm<?php echo $data['id_d'];?>"><?php echo $data['nom_d'];?></label>
                                                     <?php } ?>
                                                 </div>
-                                                <button class="col-md-1" class="submitBtn" value="Créer" type="submit">Ajouter</button>
                                         </div>
                                     </div>
                                 </form>
