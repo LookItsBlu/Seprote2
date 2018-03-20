@@ -44,21 +44,6 @@ export default class InfoList {
         obj.fetched.forEach(elem => {
             let display = [];
             let value_to_display = obj.displayed_value[obj.event.parent.depth];
-<<<<<<< HEAD
-            if (value_to_display.constructor === Array) {
-                for (let value of value_to_display) {
-                    display += "<td>..value..</td>".strcast({
-                        "value": elem[value]
-                    });
-                }
-            } else {
-                display += "<td>..value..</td>".strcast({
-                    "value": elem[value_to_display]
-                });
-            }
-
-            obj.items.push(new infoListItem(obj, display, elem[0], obj.event.breadcrum));
-=======
             if(value_to_display.constructor === Array)
                 for(let value of value_to_display)
                     display.push(elem[value])
@@ -66,7 +51,6 @@ export default class InfoList {
                 display.push(elem[value_to_display])
 
             obj.items.push(new infoListItem(obj, display, elem[0]));
->>>>>>> master/master
         });
 
         obj.createTable(obj);
@@ -98,17 +82,10 @@ export default class InfoList {
         let tableHTML = '<thead>';
 
         let value_names = obj.niveaux[obj.event.parent.depth];
-<<<<<<< HEAD
         if (value_names.constructor === Array)
             for (let value_name of value_names)
                 tableHTML += '<th>' + value_name + '</th>';
         else tableHTML = '<th>' + value_names + '</th>';
-=======
-        if(value_names.constructor === Array)
-            for(let value_name of value_names)
-                tableHTML += '<th>'+value_name+'</th>';
-        else tableHTML += '<th>'+value_names+'</th>';
->>>>>>> master/master
 
         if (obj.role < 3) tableHTML += "<th></th><th></th><th></th>"
 
@@ -142,23 +119,9 @@ export default class InfoList {
         obj.checkForEvents(obj);
     }
 
-<<<<<<< HEAD
-    checkForEvents() {
-        window.addEventListener("infoList Edit", (event) => {
-            event.stopPropagation();
-            let tds = [].slice.call($('.' + event.detail.class + ' td'));
-
-            tds = tds.slice(0, -3);
-            for (let td in tds) {
-                tds[td].innerHTML = "<input type='text' value='..oldval..'>".strcast({
-                    "oldval": tds[td].innerHTML
-                });
-            }
-=======
     checkForEvents(obj) {
         window.addEventListener("infoList Update", (event)=>{
             obj.updateList(obj);
->>>>>>> master/master
         });
 
         window.addEventListener("infoList Delete", (event)=>{
