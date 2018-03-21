@@ -16,9 +16,6 @@ export default class InfoList {
             1, [1, 2], [1, 2], [1, 2], [12, 13, 2, 3, 4]
         ];
 
-        this.depth = -1;
-        this.id = -1;
-
         this.event = {};
         this.fetched = {};
 
