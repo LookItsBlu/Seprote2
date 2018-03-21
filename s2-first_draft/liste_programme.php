@@ -14,14 +14,11 @@
             <table class="table form_table col-sm-12" id="liste_program">
             </table>
         </div>
-        <div class="cursor_drag">
-            <img src="src/drag_icon.png" />
-        </div>
         <div class="zone zone_table">
             <table class="table sep_table col-sm-12" id="table_program">
 				<thead>
 					<th></th>
-				<thead>
+                </thead>
             </table>
         </div>
     </div>

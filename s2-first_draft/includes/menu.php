@@ -1,6 +1,6 @@
 <div id="header">
     <div class="wrap">
-        <img class="seprote" src="src/seprote.png" alt="Seprote" />
+        <img class="seprote" src="src/seprote_logo.svg" alt="Seprote" />
     </div>
     <img class="iut" src="src/iut2.png" alt="IUT Calais Boulogne" />
 </div>

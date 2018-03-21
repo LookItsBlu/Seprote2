@@ -6,7 +6,7 @@
 ?>
 
     <div class="loginWrap">
-        <img class="loginSeprote" src="src/seprote.png" alt="Seprote" />
+        <img class="loginSeprote" src="src/seprote_logo.svg" alt="Seprote" />
         <div class="loginIutImg">
             <img class="loginIut" src="src/iut.png" alt="IUT Calais Boulogne" />
         </div>
