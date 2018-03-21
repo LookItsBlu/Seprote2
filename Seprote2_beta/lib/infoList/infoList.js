@@ -5,7 +5,6 @@ export default class InfoList {
         this.base = div;
 
         this.niveaux = [
-            //"Année",
             "Formation",
             ["Debut de semestre", "Fin de semestre"],
             ["Debut de période", "Fin de période"],
@@ -26,25 +25,22 @@ export default class InfoList {
         this.event = event;
         this.fetched = new_items;
 
-        this.getRole(this, this.createItems);
-    }
-
-    getRole(obj, callback) {
         $.ajax({
             url: 'lib/infoList/php/infoList.getRole.php',
+            context: this,
             success: function (data) {
-                obj.role = data;
-                callback(obj);
+                this.role = data;
+                this.createItems();
             }
         });
     }
 
-    createItems(obj) {
-        obj.items = new Array();
+    createItems() {
+        this.items = new Array();
 
         let display = [];
-        let data_cells = obj.displayed_value[obj.event.parent.depth];
-        obj.fetched.forEach(elem => {
+        let data_cells = this.displayed_value[this.event.parent.depth];
+        this.fetched.forEach(elem => {
             display = [];
             if(data_cells.constructor === Array)
                 for(let value of data_cells)
@@ -52,92 +48,93 @@ export default class InfoList {
             else
                 display.push(elem[data_cells])
 
-            obj.items.push(new infoListItem(obj, display, elem[0]));
+            this.items.push(new infoListItem(this, display, elem[0]));
         });
 
         //ajoute un button pour ajouter une nouvelle valeur
-        if(obj.role < 3) {
+        if(this.role < 3) {
             display = [];
             if(data_cells.constructor === Array)
                 for(let value of data_cells) display.push('')
             else display.push('')
 
-            let add_button = new infoListItem(obj, display, -1);
+            let add_button = new infoListItem(this, display, -1);
             add_button.makeAddButton();
-            obj.items.push(add_button);
+            this.items.push(add_button);
         }
 
-        obj.createTable(obj);
+        this.createTable();
     }
 
-    updateList(obj) {
+    updateList() {
 
         let tableHTML = '<thead>';
 
-        let value_names = obj.niveaux[obj.event.parent.depth];
+        let value_names = this.niveaux[this.event.parent.depth];
         if(value_names.constructor === Array)
             for(let value_name of value_names)
                 tableHTML += '<th>'+value_name+'</th>';
         else tableHTML += '<th>'+value_names+'</th>';
 
-        if(obj.role < 3) tableHTML += "<th></th><th></th><th></th>"
+        if(this.role < 3) tableHTML += "<th></th><th></th><th></th>"
 
         tableHTML += "</thead><tbody>";
-        obj.items.forEach(item => { tableHTML += item.displayItem(); });
+        this.items.forEach(item => { tableHTML += item.displayItem(); });
         tableHTML += "</tbody>";
 
-        obj.base.innerHTML = tableHTML;
+        this.base.innerHTML = tableHTML;
 
         // set clicks
-        obj.items.forEach(item => { item.setClick(); });
+        this.items.forEach(item => { item.setClick(); });
     }
 
-    createTable(obj) {
+    createTable() {
         let tableHTML = '<thead>';
 
-        let value_names = obj.niveaux[obj.event.parent.depth];
+        let value_names = this.niveaux[this.event.parent.depth];
         if (value_names.constructor === Array)
             for (let value_name of value_names)
                 tableHTML += '<th>' + value_name + '</th>';
         else tableHTML = '<th>' + value_names + '</th>';
 
-        if (obj.role < 3) tableHTML += "<th></th><th></th><th></th>"
+        if (this.role < 3) tableHTML += "<th></th><th></th><th></th>"
 
         tableHTML += "</thead><tbody>";
-        obj.items.forEach(item => { tableHTML += item.displayItem(); });
+        this.items.forEach(item => { tableHTML += item.displayItem(); });
         tableHTML += "</tbody>";
 
-        obj.base.innerHTML = tableHTML;
+        this.base.innerHTML = tableHTML;
 
         // set clicks
-        obj.items.forEach(item => {
+        this.items.forEach(item => {
             item.setClick();
         });
 
         // look for events
-        obj.checkForEvents(obj);
+        this.checkForEvents();
     }
 
-    checkForEvents(obj) {
+    checkForEvents() {
         window.addEventListener("infoList Update", event => {
-            obj.updateList(obj);
+            this.updateList();
         });
 
         window.addEventListener("infoList Delete", event => {
-            obj.items = obj.items.filter(obj => {
-                return obj.id !== event.detail.id && obj.class !== event.detail.class;
+            this.items = this.items.filter(item => {
+                return item.id !== event.detail.id && item.class !== event.detail.class;
             });
-            obj.updateList(obj);
+            this.updateList();
         });
 
         window.addEventListener("infoList Refetch", event =>{
             $.ajax({
                 method: 'post',
                 url: 'lib/infoList/php/infoList.gatherInfo.php',
-                data: { 'depth': obj.event.parent.depth, 'id': obj.event.item.id },
+                data: { 'depth': this.event.parent.depth, 'id': this.event.item.id },
+                context: this,
                 success: function(data){
                     if (data === 'end') return 0;
-                    else obj.updateItems(obj.event, JSON.parse(data));
+                    else this.updateItems(this.event, JSON.parse(data));
                 }
             });
         });
