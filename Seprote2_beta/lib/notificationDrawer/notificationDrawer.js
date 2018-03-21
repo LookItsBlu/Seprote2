@@ -113,7 +113,7 @@ class notification {
             notifObject.notifHTML.addEventListener("mouseout", mouseoutHandler);
         });
 
-        //Add timeout to automaitcaly dispose of the notification
+        //Add timeout to automaticaly dispose of the notification
         notifObject.TimeoutFunc = setTimeout(
             function(){
                 //get index of clicked notification
@@ -152,7 +152,29 @@ class notification {
         }
 
         //slide the new notification into view
-        setTimeout(function(){
+
+        // BUG: Note pour les future mainteneur / dev de Seprote 3
+        // Celui la est bizzare, donc je passe en francais pour
+        // que ce soit plus facile a comprendre.
+        //
+        // Note: Le timeout est utilisé pour contourner le problème
+        // pour le moment, mais une correction définitive serait mieux.
+        //
+        // Recréation: Sur la page login, appuyer sur le bouton
+        // de connexion.
+        //
+        // Resultat: Une notification apparait sans animation, et
+        // les actions de clique ne marchent pas.
+        //
+        // Cause: L'élément DOM crée en javascript n'est pas encore
+        // entièrement chargé avant l'execution des fonctions
+        // ajoutant les actions et créant l'animation.
+        //
+        // Solution: Refaire cette partie du code pour faire en
+        // sorte qu'elle ne s'execute que lorsque l'élement DOM est
+        // entièrement chargé.
+
+        setTimeout(()=>{
             switch(p.drawerDirection) {
                 case 'topleft':
                 case 'bottomleft':
@@ -164,6 +186,8 @@ class notification {
                     break;
             }
         }, 10);
+
+        // /BUG
     }
 
 
