@@ -51,6 +51,8 @@ switch(count($_POST['breadcrum'])-1){
 
     case 3: // module
 
+    case 4: // heures
+
     default:
         break;
 }

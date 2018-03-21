@@ -9,10 +9,11 @@ export default class InfoList {
             "Formation",
             ["Debut de semestre", "Fin de semestre"],
             ["Debut de période", "Fin de période"],
-            ["Module", "Code"]
+            ["Module", "Code"],
+            ["Nom", "Prenom", "Heures de CM", "Heures de TD", "Heures de TP"]
         ];
         this.displayed_value = [
-            1, [1, 2], [1, 2], [1, 2]
+            1, [1, 2], [1, 2], [1, 2], [12, 13, 2, 3, 4]
         ];
 
         this.event = {};
