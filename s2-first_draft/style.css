@@ -17,53 +17,12 @@ h3 {
     margin: 20px 0;
 }
 
-/* Change Calendar Button */
-
-.fc-state-default {
-    background: none!important;
-    color: #000!important;
-    border: none!important;
-    border-bottom: 4px solid rgba(0, 0, 0, 0)!important;
-    box-shadow: none!important;
-    text-shadow: none!important;
-}
-
-button,
-input[type='button'] {
-    background-color: rgba(0, 0, 0, 0);
-    padding: 4px 0;
-    border: none;
-    border-bottom: 4px solid rgba(0, 0, 0, 0);
-    cursor: pointer;
-    transition: 0.12s linear all;
-    font-size: 16px;
-    letter-spacing: 3px;
-    color: #ef342a;
-}
-
-.btnActive {
-    border-bottom: 4px solid #00AFF1!important;
-}
-
-button:hover,
-.fc-state-disabled,
-input[type='button']:hover {
-    border-bottom: 4px solid #ccc!important;
-}
-
-button:active,
-input[type='button']:active {
-    border-bottom: 4px solid #00AFF1!important;
-}
-
-/*#calendar button, #calendar .btnActive { border-bottom: none!important; }*/
-
 #header {
     display: inline-block;
     width: 100%;
     height: 56px;
     background-position: center;
-    background: url('../src/headerTransition.png') no-repeat center, linear-gradient(90deg, #eee, #eee 49.9%, #00AFF1 50.1%) no-repeat;
+    background: url('src/headerTransition.png') no-repeat center, linear-gradient(90deg, #eee, #eee 49.9%, #00AFF1 50.1%) no-repeat;
     text-align: center;
     box-shadow: 0 -6px 10px 6px rgba(20, 20, 20, 0.5);
 }
@@ -126,6 +85,107 @@ input[type='button']:active {
 .itemName:hover {
     color: #fafafa;
     text-shadow: 0 0 10px #333;
+}
+
+
+/* ----- Connexion ----- */
+
+.loginWrap {
+    width: inherit;
+    text-align: center;
+}
+
+.loginIut {
+    height: 130px;
+    display: inline-block;
+}
+
+.loginSeprote {
+    height: 60px;
+    left: 0;
+    position: absolute;
+}
+
+.loginIutImg {
+    margin: 10px 0 75px;
+}
+
+.form_connex {
+    background-color: white;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#loginForm {
+    display: block;
+}
+
+.form_connex input {
+    border: none;
+    border-bottom: 1px black solid;
+    margin: 40px auto;
+    display: block;
+    font-size: 32px;
+}
+
+.form_connex button {
+    background-color: rgba(0, 175, 241, 1);
+    color: white;
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    padding: 0;
+    border: none!important;
+    transition: 0.2s ease all;
+}
+
+.form_connex button:hover {
+    background-color: rgb(0, 139, 241);
+    letter-spacing: 6;
+}
+
+.form_connex button:active {
+    background-color: rgba(0, 0, 255, 0.5);
+    letter-spacing: 1.5;
+}
+
+/* Change Calendar Button */
+
+.fc-state-default {
+    background: none!important;
+    color: #000!important;
+    border: none!important;
+    border-bottom: 4px solid rgba(0, 0, 0, 0)!important;
+    box-shadow: none!important;
+    text-shadow: none!important;
+}
+
+button,
+input[type='button'] {
+    background-color: rgba(0, 0, 0, 0);
+    padding: 4px 0;
+    border: none;
+    border-bottom: 4px solid rgba(0, 0, 0, 0);
+    cursor: pointer;
+    transition: 0.12s linear all;
+    font-size: 16px;
+    letter-spacing: 3px;
+    color: #ef342a;
+}
+
+.btnActive {
+    border-bottom: 4px solid #00AFF1!important;
+}
+
+button:hover,
+.fc-state-disabled,
+input[type='button']:hover {
+    border-bottom: 4px solid #ccc!important;
+}
+
+button:active,
+input[type='button']:active {
+    border-bottom: 4px solid #00AFF1!important;
 }
 
 /*MAIN*/
@@ -207,70 +267,7 @@ input[type='button']:active {
     transform: scale(0.85);
 }
 
-/* ----- Gestion des comptes ----- */
-
-.accInput {
-    margin: 20px auto 0 auto;
-    background-color: #fff;
-    padding: 10px 0;
-}
-
-.accInput input,
-.accInput select {
-    margin: 0 5px;
-}
-
-.submitBtn {
-    padding: 3px 7px;
-}
-
-#ListeComptes {
-    margin: 20px auto 0 auto;
-}
-
-.sep_table tr:nth-child(odd) {
-    background-color: rgba(235, 235, 235, 1);
-}
-
-.sep_table tr:nth-child(even) {
-    background-color: rgba(255, 255, 255, 1);
-}
-
-.sep_table th {
-    background-color: #00AFF1;
-    color: white;
-}
-
-.sep_table th,
-.sep_table td {
-    padding-left: 10px;
-    height: 36px;
-}
-
-.form-check {
-    padding-top: 10px;
-}
-
-.form-check label {
-    margin: 0;
-}
-
-/*END MAIN*/
-
-footer {
-    display: block;
-    position: fixed;
-    bottom: 0;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 0 10px;
-}
-
-footer .separator {
-    margin: 0 5px;
-}
-
-/* ----- Liste des programmes (NEW) ----- */
+/* ----- Liste des programmes ----- */
 
 .main_content {
     display: flex;
@@ -341,10 +338,6 @@ img.editIcon {
     width: 25px;
 }
 
-/*img.editIcon:hover {
-    opacity: 0.5;
-}*/
-
 .table .treelist-history-back td {
     padding: 10px .75rem 5px;
     font-weight: bold;
@@ -393,4 +386,67 @@ img.editIcon {
 .list-item-add img {
     margin-bottom: 3px;
     margin-right: 5px;
+}
+
+/* ----- Gestion des comptes ----- */
+
+.accInput {
+    margin: 20px auto 0 auto;
+    background-color: #fff;
+    padding: 10px 0;
+}
+
+.accInput input,
+.accInput select {
+    margin: 0 5px;
+}
+
+.submitBtn {
+    padding: 3px 7px;
+}
+
+#ListeComptes {
+    margin: 20px auto 0 auto;
+}
+
+.sep_table tr:nth-child(odd) {
+    background-color: rgba(235, 235, 235, 1);
+}
+
+.sep_table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.sep_table th {
+    background-color: #00AFF1;
+    color: white;
+}
+
+.sep_table th,
+.sep_table td {
+    padding-left: 10px;
+    height: 36px;
+}
+
+.form-check {
+    padding-top: 10px;
+}
+
+.form-check label {
+    margin: 0;
+}
+
+/* ----- Footer ----- */
+
+footer {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 0 10px;
+}
+
+footer .separator {
+    margin: 0 5px;
 }

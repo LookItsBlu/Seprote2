@@ -34,7 +34,7 @@
     <!-- Custom Scripts & Styles -->
     <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript" src="js/notifications.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>

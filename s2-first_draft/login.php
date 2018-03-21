@@ -5,8 +5,6 @@
     include('includes/header.php');
 ?>
 
-    <link rel="stylesheet" type="text/css" href="css/login.css">
-
     <div class="loginWrap">
         <img class="loginSeprote" src="src/seprote.png" alt="Seprote" />
         <div class="loginIutImg">
