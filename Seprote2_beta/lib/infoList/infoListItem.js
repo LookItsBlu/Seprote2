@@ -107,12 +107,7 @@ export default class infoListItem {
         });
 
         window.dispatchEvent(new CustomEvent("infoList Delete",
-            {
-                detail: {
-                    id: this.id,
-                    class: this.class
-                }
-            }
+            { detail: { id: this.id, class: this.class } }
         ));
     }
 
@@ -128,6 +123,9 @@ export default class infoListItem {
             data: {
                 'breadcrum': this.breadcrum,
                 'new_values': this.display
+            },
+            success(data) {
+                window.dispatchEvent(new CustomEvent("infoList Refetch"));
             }
         });
     }

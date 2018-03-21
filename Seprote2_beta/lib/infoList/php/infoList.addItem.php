@@ -24,9 +24,12 @@
 
 	switch(count($_POST['breadcrum'])-1){
 		case 0: // formation
-			$sql = 'INSERT INTO formation(nom_f, id_d) VALUES(?, 1)';
+			$sql = 'INSERT INTO formation(nom_f, id_d) VALUES(:id_annee, :id_formation)';
 			$pdoreq = $bdd->prepare($sql);
-			$pdoreq->execute($_POST['new_values'][0]);
+			$pdoreq->execute(array(
+				':id_annee' => $_POST['new_values'][0],
+				':id_formation' => $_SESSION['id_dep']
+			));
 
 			$sql = 'INSERT INTO for_annee(id_f, id_a) VALUES(:id_formation, :id_annee)';
 			$pdoreq = $bdd->prepare($sql);
@@ -60,7 +63,7 @@
 			));
 			break;
 		case 3: // module
-			$sql = 'INSERT INTO module(nom_m, code_m) VALUES(:nom, :code)';
+			$sql = 'INSERT INTO module(nom_m, code_m, cm_g, td_g, tp_g) VALUES(:nom, :code, 0, 0, 0)';
 			$pdoreq = $bdd->prepare($sql);
 			$pdoreq->execute(array(
 				':nom' => $_POST['new_values'][0],

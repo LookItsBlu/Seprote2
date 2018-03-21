@@ -16,7 +16,7 @@ switch(count($_POST['breadcrum'])-1){
     case 0:
         $sql = 'DELETE FROM formation
         WHERE id_f IN (
-            SELECT id_a FROM for_annee WHERE id_a = :id_annee AND id_f = :id_formation
+            SELECT id_f FROM for_annee WHERE id_a = :id_annee AND id_f = :id_formation
         )';
         $pdoreq = $bdd->prepare($sql);
         $pdoreq->execute(array(

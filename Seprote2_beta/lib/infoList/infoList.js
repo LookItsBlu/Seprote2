@@ -16,6 +16,9 @@ export default class InfoList {
             1, [1, 2], [1, 2], [1, 2], [12, 13, 2, 3, 4]
         ];
 
+        this.depth = -1;
+        this.id = -1;
+
         this.event = {};
         this.fetched = {};
 
@@ -119,15 +122,27 @@ export default class InfoList {
     }
 
     checkForEvents(obj) {
-        window.addEventListener("infoList Update", (event)=>{
+        window.addEventListener("infoList Update", event => {
             obj.updateList(obj);
         });
 
-        window.addEventListener("infoList Delete", (event)=>{
+        window.addEventListener("infoList Delete", event => {
             obj.items = obj.items.filter(obj => {
                 return obj.id !== event.detail.id && obj.class !== event.detail.class;
             });
             obj.updateList(obj);
+        });
+
+        window.addEventListener("infoList Refetch", event =>{
+            $.ajax({
+                method: 'post',
+                url: 'lib/infoList/php/infoList.gatherInfo.php',
+                data: { 'depth': obj.event.parent.depth, 'id': obj.event.item.id },
+                success: function(data){
+                    if (data === 'end') return 0;
+                    else obj.updateItems(obj.event, JSON.parse(data));
+                }
+            });
         });
     }
 }
