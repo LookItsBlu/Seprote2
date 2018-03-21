@@ -7,7 +7,7 @@ $level = array(
     "semestre",
     "periode",
     "module",
-    ""
+    "heures"
 );
 
 $res = '';
@@ -40,6 +40,15 @@ switch($level[$_POST['depth']]){
         break;
     case 'module':
         $sql = 'SELECT * FROM module INNER JOIN per_mod ON module.id_m = per_mod.id_mod WHERE id_per = :id';
+        $pdoreq = $bdd->prepare($sql);
+        $pdoreq->execute(array(':id' => $_POST['id']));
+        $res = $pdoreq->fetchall();
+        break;
+    case 'heures':
+        $sql = 'SELECT * FROM volume_horaire
+        INNER JOIN module ON volume_horaire.id_module = module.id_m
+        INNER JOIN utilisateur ON volume_horaire.id_utilisateur = utilisateur.id_u
+        WHERE id_module = :id';
         $pdoreq = $bdd->prepare($sql);
         $pdoreq->execute(array(':id' => $_POST['id']));
         $res = $pdoreq->fetchall();
