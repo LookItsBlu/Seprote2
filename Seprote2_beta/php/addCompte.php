@@ -31,6 +31,7 @@ else if($req_identiq->fetch()){
 /********** REQUETE A EFFECTUER **************/
 
 else{
+
     $req_ajout = $bdd->prepare("INSERT INTO utilisateur(nom,prenom,mail,id_role,mdp) VALUES(:nom,:prenom,:mail,:id_role,:mdp)");					$req_ajout->execute(array(
         'nom' => $_POST['nom'],
         'prenom' => $_POST['prenom'],
