@@ -44,29 +44,14 @@ include('includes/menu.php');
         </div>
         <div class="row">
             <table id="ListeComptes" class="sep_table col-md-12">
-                <form id="delete_users" method="POST" action="#">
-                    <input type='hidden' name='type_form' value='3'>
-                    <thead>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Prénom</th>
-                            <th>Adresse mail</th>
-                            <th>Rôle</th>
-                            <th>Département</th>
-                            <th>Éditer</th>
-                            <th>Supprimer</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </form>
+				<thead>
+					<th></th>
+                </thead>
             </table>
         </div>
     </div>
 </div>
 
-<script src="js/ajax/fetchCompte.js"></script>
-<script src="js/ajax/addCompte.js"></script>
-<script src="js/ajax/updateCompte.js"></script>
-<script src="js/ajax/deleteCompte.js"></script>
+<script type="module" src="js/gestion_comptes.js"></script>
 
 <?php include('includes/footer.php'); ?>
