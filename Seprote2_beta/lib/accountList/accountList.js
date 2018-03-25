@@ -21,7 +21,6 @@ export default class accountList {
     }
 
     getItems() {
-        console.log('fetching items...');
         $.ajax({
             context: this,
             method: 'post',
@@ -34,7 +33,6 @@ export default class accountList {
     }
 
     createItems() {
-        console.log('creating item objects...');
         this.items = new Array();
 
         let display = [];
@@ -49,8 +47,6 @@ export default class accountList {
     }
 
     createTable() {
-        console.log('creating table...');
-
         let tableHTML = '<thead>';
 
         for(let header of this.headers) tableHTML += '<th>'+header+'</th>';
@@ -63,6 +59,8 @@ export default class accountList {
 
         this.base.innerHTML = tableHTML;
 
+        if(document.querySelector('.multiselect')) $('.multiselect').multipleSelect();
+
         // set clicks
         this.items.forEach(item => { item.setClick(); });
     }
@@ -70,12 +68,14 @@ export default class accountList {
     checkForEvents() {
         window.addEventListener("accountList Add", event => {
             let evt = event.detail;
+
             this.addItem({
                 nom: evt.nom,
                 prenom: evt.prenom,
                 mail: evt.mail,
+                mdp: evt.mdp,
                 id_role: evt.id_role,
-                mdp: evt.mdp
+                id_dept: document.querySelector('.departements').value
             });
         });
 
@@ -92,11 +92,6 @@ export default class accountList {
     }
 
     addItem(params) {
-        let itemDOM = document.querySelector('.'+this.class);
-        for(let i in this.display) {
-            this.display[i] = Array.from(itemDOM.getElementsByTagName('input'))[i].value;
-        }
-
         $.ajax({
             context: this,
             method: 'post',

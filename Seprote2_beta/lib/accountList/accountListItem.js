@@ -7,6 +7,14 @@ export default class accountListItem {
         this.class = 'accountListItem-..value..'.strcast({
             "value": Math.random().toString(36).slice(2)    //chaque item de la liste a une classe géneré aléatoirement
         });
+
+        this.editInputs = [
+            'text',
+            'text',
+            'email',
+            ['select', 'role'],
+            ['multiselect', 'departements']
+        ];
     }
 
     //créer le code html de l'item
@@ -21,11 +29,49 @@ export default class accountListItem {
         `;
 
         let display_html = '';
-        for(let i in this.display)
-            if(this.editing)
-                display_html += "<td><input type='text' value='"+this.display[i]+"'></td>";
-            else
-                display_html += '<td>'+this.display[i]+'</td>';
+        for(let i in this.display) {
+            if(this.editing) {
+                if(this.editInputs[i].constructor === Array && this.editInputs[i][0] == 'select' || this.editInputs[i][0] == 'multiselect') {
+                    var items = [];
+                    switch(this.editInputs[i][1]) {
+                        case 'role':
+                            $.ajax({
+                                url: 'lib/accountList/php/accountList.gatherRoles.php',
+                                async: false,
+                                success(data) { items = JSON.parse(data); }
+                            });
+                            break;
+                        case 'departements':
+                            $.ajax({
+                                url: 'lib/accountList/php/accountList.gatherDept.php',
+                                async: false,
+                                success(data) { items = JSON.parse(data) }
+                            });
+                            break;
+                        default:
+                            break;
+                    }
+                    let options = '';
+                    for(let item in items) {
+                        if(this.display[i] == items[item][1])
+                            options += "<option value='"+items[item][0]+"' selected>"+items[item][1]+"</option>";
+                        else
+                            options += "<option value='"+items[item][0]+"'>"+items[item][1]+"</option>";
+                    }
+
+                    var attr_list = '';
+                    if(this.editInputs[i][0] == 'multiselect')
+                        attr_list = "class='multiselect' multiple='multiple'";
+
+                    display_html += "<td><select ..attrlist..>..options..</select></td>".strcast({
+                        'attrlist': attr_list,
+                        'options': options
+                    });
+                }
+                else display_html += "<td><input type='"+this.editInputs[i]+"' value='"+this.display[i]+"'></td>";
+            }
+            else display_html += '<td>'+this.display[i]+'</td>';
+        }
 
         return "<tr class='..class..'>..item.. ..buttons..</tr>".strcast({
             "class": this.class,
@@ -47,8 +93,17 @@ export default class accountListItem {
         let itemDOM = document.querySelector('.'+this.class);
         if(this.editing) {
             // update visible item
+            var sentData = [];
             for(let i in this.display) {
-                this.display[i] = Array.from(itemDOM.getElementsByTagName('input'))[i].value;
+                if(this.editInputs[i].constructor === Array && this.editInputs[i][0] == 'select' || this.editInputs[i][0] == 'multiselect') {
+                    let selectElt = Array.from(itemDOM.getElementsByTagName('select'))[i-3]
+                    this.display[i] = selectElt.options[selectElt.selectedIndex].text;
+                    sentData.push(selectElt.value);
+                }
+                else {
+                    this.display[i] = Array.from(itemDOM.getElementsByTagName('input'))[i].value;
+                    sentData.push(Array.from(itemDOM.getElementsByTagName('input'))[i].value);
+                }
             }
             // ...and send the update to the database
             $.ajax({
@@ -56,7 +111,7 @@ export default class accountListItem {
                 url: 'lib/accountList/php/accountList.editItem.php',
                 data: {
                     'id': this.id,
-                    'new_values': this.display
+                    'new_values': sentData
                 }
             });
         }

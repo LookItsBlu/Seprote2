@@ -26,6 +26,10 @@
     <!-- Google Chart Libs -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
+    <!-- Multiple Select Libs -->
+    <script type="text/javascript" src="lib/multiple-select/multiple-select.js"></script>
+    <link rel="stylesheet" type="text/css" href="lib/multiple-select/multiple-select.css">
+
     <!-- Custom Libs -->
     <script type="text/javascript" src="lib/strcast.min.js"></script>
     <script type="text/javascript" src="lib/notificationDrawer/notificationItem.js"></script>

@@ -27,18 +27,16 @@ include('includes/menu.php');
                         <option value="3" selected>Professeur</option>
                     </select>
                     <input class="col-md-2" type="password" name="mdp" placeholder="Mot de passe">
-                    <?php
+                    <select class="departements col-md-2" multiple="multiple">
+                        <?php
                         $req_dptm = $bdd->prepare("SELECT id_d,nom_d from departement");
                         $req_dptm->execute();
-                    ?>
-                    <button class="col-md-1" class="submitBtn" value="Créer" type="submit">Ajouter</button>
-                    <div class="form-check col-md-12">
-                        <span>Département :</span>
-                        <?php while($data =$req_dptm->fetch()){ ?>
-                            <input type="checkbox" class="" id="dptm<?php echo $data['id_d'];?>">
-                            <label class="" for="dptm<?php echo $data['id_d'];?>"><?php echo $data['nom_d'];?></label>
+                        while($data =$req_dptm->fetch()){
+                        ?>
+                            <option value="<?php echo $data['id_d'];?>"><?php echo $data['nom_d'];?></option>
                         <?php } ?>
-                    </div>
+                    </select>
+                    <button class="col-md-1" class="submitBtn" value="Créer" type="submit">Ajouter</button>
                 </form>
             </div>
         </div>

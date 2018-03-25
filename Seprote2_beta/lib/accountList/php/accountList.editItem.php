@@ -15,4 +15,10 @@ if( isset($_POST["new_values"]) ){
         "role"=> $_POST["new_values"][3],
         "id"=> $_POST["id"]
     ));
+
+    $req = $bdd->prepare('UPDATE util_dep SET id_d = :dept WHERE id_u = :id');
+    $res = $req->execute(array(
+        "dept"=> $_POST["new_values"][4],
+        "id"=> $_POST["id"]
+    ));
 }

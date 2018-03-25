@@ -60,12 +60,22 @@
 	        'mdp' => sha1($_POST['mdp'])
 	    ));
 
-	    if(!$req_ajout){
+		$req_ajout_dep = $bdd->prepare("
+	    INSERT INTO util_dep(id_u, id_d)
+	    VALUES(:id_u, :id_d)
+	    ");
+
+	    $req_ajout_dep->execute(array(
+	        'id_u' => $bdd->lastInsertId(),
+	        'id_d' => $_POST['id_dept']
+	    ));
+
+	    if(!$req_ajout || !$req_ajout_dep){
 			$message = array(
 				'title' => 'Erreur du serveur !',
 				'body' => 'Une erreur a eu lieu lors de la création de ce compte, veuillez réessayer ultérieurement.'
 			);
-	    } else{
+	    } else {
 			$message = array(
 				'title' => 'Compte créé !',
 				'body' => 'Le compte a été créé avec succès !',
