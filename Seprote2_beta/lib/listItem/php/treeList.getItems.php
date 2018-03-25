@@ -28,9 +28,12 @@ switch($level[$_POST['depth']]){
         $res = $pdoreq->fetchall();
         break;
     case 'formation':
-        $sql = 'SELECT * FROM formation INNER JOIN for_annee ON formation.id_f = for_annee.id_f WHERE id_a = :id';
+        $sql = 'SELECT * FROM formation INNER JOIN for_annee ON formation.id_f = for_annee.id_f WHERE id_a = :id AND id_d = :dep';
         $pdoreq = $bdd->prepare($sql);
-        $pdoreq->execute(array(':id' => $_POST['id']));
+        $pdoreq->execute(array(
+            ':id' => $_POST['id'],
+            ':dep' => $_SESSION['id_dep']
+        ));
         $res = $pdoreq->fetchall();
         break;
     case 'semestre':
