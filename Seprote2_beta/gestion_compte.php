@@ -12,15 +12,15 @@ include('includes/header.php');
 include('includes/menu.php');
 ?>
 
-<div id="main" class="mainWrap">
-    <div id="content" class="container">
-        <div class="row">
-            <div class="col-md-12 accInput">
-                <form class='addCompte' action="#" method="POST">
-                    <input class="col-md-2" name="nom" placeholder="Nom" type="text">
-                    <input class="col-md-2" name="prenom" placeholder="Prénom" type="text">
-                    <input class="col-md-2" name="mail" placeholder="Adresse mail" type="text">
-                    <select class="col-md-2" name="id_role" type="text">
+    <div id="main" class="mainWrap">
+        <div id="content" class="container">
+            <div class="row">
+                <div class="col-md-12 accInput">
+                    <form class='addCompte' action="#" method="POST">
+                        <input class="col-md-2" name="nom" placeholder="Nom" type="text">
+                        <input class="col-md-2" name="prenom" placeholder="Prénom" type="text">
+                        <input class="col-md-2" name="mail" placeholder="Adresse mail" type="text">
+                        <select class="col-md-2" name="id_role" type="text">
                         <?php if($_SESSION['role'] == 1) { ?>
                             <option value="2">Gestionnaire</option>
                         <?php } ?>
@@ -40,16 +40,8 @@ include('includes/menu.php');
                 </form>
             </div>
         </div>
-        <div class="row">
-            <table id="ListeComptes" class="sep_table col-md-12">
-				<thead>
-					<th></th>
-                </thead>
-            </table>
-        </div>
     </div>
-</div>
 
-<script type="module" src="js/gestion_comptes.js"></script>
+    <script type="module" src="js/gestion_comptes.js"></script>
 
-<?php include('includes/footer.php'); ?>
+    <?php include('includes/footer.php'); ?>
