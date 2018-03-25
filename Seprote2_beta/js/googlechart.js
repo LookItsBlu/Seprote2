@@ -1,12 +1,11 @@
-$(document).ready(function(){
+$(document).ready(()=>{
 	var hour = [0,0,0];
 	//get the number of hours for the current user in the current program
-	$(".selectProg").change(function(){
-		var params = "id_prog=" + $(this).val();
+	window.addEventListener('Chart Update', evt => {
 		$.ajax({
 			type: 'POST',
 			url: 'php/chartHour.php',
-			data: params,
+			data: { 'id_prog': evt.detail.program },
 			success: function(data){
 				var time = JSON.parse(data);
 				for(var i=0; i<data.length; i++)
@@ -57,8 +56,8 @@ $(document).ready(function(){
 	$('.selection>button').click(function(e){
 		if(e.currentTarget.className == "tabBtn btnActive" && chartType!="table") {
 			//A FAIRE
-            		chartType = "table";
-            		$("#chart").html("<table><tr><td>CM</td><td>"+hour[0]+"</td></tr><tr><td>TD</td><td>"+hour[1]+"</td></tr><tr><td>TP</td><td>"+hour[2]+"</td></tr></table>");
+        	chartType = "table";
+        	$("#chart").html("<table><tr><td>CM</td><td>"+hour[0]+"</td></tr><tr><td>TD</td><td>"+hour[1]+"</td></tr><tr><td>TP</td><td>"+hour[2]+"</td></tr></table>");
 		} else if(e.currentTarget.className == "pieBtn btnActive" && chartType!="pie") {
 			chartType="pie";
 			drawChart();

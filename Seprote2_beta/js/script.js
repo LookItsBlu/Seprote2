@@ -1,15 +1,10 @@
-$('document').ready(function () {
-	$('window').resize(function () {
-		$('body').height($('window').innerHeight);
-	});
-
-	$(".selectProg").change(function () {
+$('document').ready(()=>{
+	//$(".selectProg").change(function () {
+	window.addEventListener('Chart Update', evt => {
 		var JSON = {
 			type: 'POST',
 			url: 'php/fillCalendar.php',
-			data: {
-				"id_prog": parseInt($(".selectProg").val())
-			},
+			data: { 'id_prog': evt.detail.program }
 		};
 
 		$("#calendar").fullCalendar('removeEventSources');
