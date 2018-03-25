@@ -19,6 +19,9 @@ export default class InfoList {
         this.fetched = {};
 
         this.role = -1;
+
+        // look for events
+        this.checkForEvents();
     }
 
     updateItems(event, new_items) {
@@ -109,9 +112,6 @@ export default class InfoList {
         this.items.forEach(item => {
             item.setClick();
         });
-
-        // look for events
-        this.checkForEvents();
     }
 
     checkForEvents() {

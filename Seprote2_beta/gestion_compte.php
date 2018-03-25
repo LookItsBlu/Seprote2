@@ -63,9 +63,6 @@ include('includes/menu.php');
         </div>
     </div>
 
-    <script src="js/ajax/fetchCompte.js"></script>
-    <script src="js/ajax/addCompte.js"></script>
-    <script src="js/ajax/updateCompte.js"></script>
-    <script src="js/ajax/deleteCompte.js"></script>
+    <script type="module" src="js/gestion_comptes.js"></script>
 
     <?php include('includes/footer.php'); ?>
