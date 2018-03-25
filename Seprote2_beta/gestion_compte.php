@@ -26,39 +26,18 @@ include('includes/menu.php');
                         <?php } ?>
                         <option value="3" selected>Professeur</option>
                     </select>
-                        <input class="col-md-2" type="password" name="mdp" placeholder="Mot de passe">
-                        <button class="col-md-1" class="submitBtn" value="Créer" type="submit">Ajouter</button>
-                        <div class="form-check col-md-12">
-                            <span>Département :</span>
-                            <?php
-                                $req_dptm = $bdd->prepare("SELECT id_d,nom_d from departement");
-                                $req_dptm->execute();
-                                while($data =$req_dptm->fetch()){ ?>
-                                <input type="checkbox" class="dept" id="dptm<?php echo $data['id_d'];?>">
-                                <label class="" for="dptm<?php echo $data['id_d'];?>"><?php echo $data['nom_d'];?></label>
-                                <?php } ?>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="row">
-                <table id="ListeComptes" class="sep_table col-md-12">
-                    <form id="delete_users" method="POST" action="#">
-                        <input type='hidden' name='type_form' value='3'>
-                        <thead>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Prénom</th>
-                                <th>Adresse mail</th>
-                                <th>Rôle</th>
-                                <th>Département</th>
-                                <th>Éditer</th>
-                                <th>Supprimer</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </form>
-                </table>
+                    <input class="col-md-2" type="password" name="mdp" placeholder="Mot de passe">
+                    <select class="departements col-md-2" multiple="multiple">
+                        <?php
+                        $req_dptm = $bdd->prepare("SELECT id_d,nom_d from departement");
+                        $req_dptm->execute();
+                        while($data =$req_dptm->fetch()){
+                        ?>
+                            <option value="<?php echo $data['id_d'];?>"><?php echo $data['nom_d'];?></option>
+                        <?php } ?>
+                    </select>
+                    <button class="col-md-1" class="submitBtn" value="Créer" type="submit">Ajouter</button>
+                </form>
             </div>
         </div>
     </div>

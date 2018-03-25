@@ -1,6 +1,10 @@
 import accountList from '../lib/accountList/accountList.js';
 
 $(document).ready(()=>{
+    $('.departements').multipleSelect({
+        placeholder: "Département"
+    });
+
     //Init accountList
     new accountList($('#ListeComptes')[0]);
 
